@@ -29,6 +29,7 @@ app.use(cookieParser());
 const allowedOrigins = [
   "http://localhost:5173", // Vite dev
   "http://localhost:4173", // Vite preview (production build)
+  "https://event-ticketing-platform-theta.vercel.app/",
 ];
 
 app.use(
