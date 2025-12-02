@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useToast } from "../components/ToastProvider";
+import { useToast } from "../components/toastProvider";
 
 export default function PaymentPage() {
   const { state } = useLocation();
