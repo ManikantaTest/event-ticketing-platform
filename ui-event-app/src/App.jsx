@@ -16,7 +16,7 @@ import BecomeOrganizer from "./components/becomeOrganizer";
 import EventSessions from "./components/eventSessions";
 import PageLoader from "./components/pageLoader";
 import ToastListener from "./components/toastListener";
-import { ToastProvider } from "./components/ToastProvider";
+import ToastProvider from "./components/toastProvider";
 import CategoryEventsPage from "./pages/categoryEventsPage";
 import Dashboard from "./pages/dashboard";
 import EventDetailsPage from "./pages/eventViewPage";

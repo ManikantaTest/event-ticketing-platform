@@ -1,7 +1,7 @@
 // utils/api.js
 import axios from "axios";
 import { logout } from "../redux/slices/authSlice";
-import { toastRef } from "../components/ToastProvider";
+import { toastRef } from "../components/toastProvider";
 
 let storeRef = null; // will be set from store setup
 
