@@ -127,6 +127,12 @@ const userSlice = createSlice({
     updatePasswordLoading: false,
     updatePasswordError: null,
     updatePasswordSuccess: false,
+    fetchBookingsLoading: false,
+    fetchBookingsError: null,
+    fetchBookingsSuccess: false,
+    fetchUserDetailsLoading: false,
+    fetchUserDetailsError: null,
+    fetchUserDetailsSuccess: false,
   },
 
   reducers: {
@@ -141,29 +147,31 @@ const userSlice = createSlice({
     builder
       // 👉 FETCH USER
       .addCase(fetchUserDetails.pending, (state) => {
-        state.loading = true;
-        state.error = null;
+        state.fetchUserDetailsLoading = true;
+        state.fetchUserDetailsError = null;
       })
       .addCase(fetchUserDetails.fulfilled, (state, action) => {
-        state.loading = false;
+        state.fetchUserDetailsLoading = false;
         state.user = action.payload.data;
+        state.fetchUserDetailsSuccess = true;
       })
       .addCase(fetchUserDetails.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
+        state.fetchUserDetailsLoading = false;
+        state.fetchUserDetailsError = action.payload;
       })
 
       .addCase(fetchUserBookings.pending, (state) => {
-        state.loading = true;
-        state.error = null;
+        state.fetchBookingsLoading = true;
+        state.fetchBookingsError = null;
       })
       .addCase(fetchUserBookings.fulfilled, (state, action) => {
-        state.loading = false;
+        state.fetchBookingsLoading = false;
         state.userBookings = action.payload.data;
+        state.fetchBookingsSuccess = true;
       })
       .addCase(fetchUserBookings.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload || "Something went wrong";
+        state.fetchBookingsLoading = false;
+        state.fetchBookingsError = action.payload || "Something went wrong";
       })
 
       .addCase(searchCities.pending, (state) => {

@@ -42,9 +42,14 @@ function App() {
     sessionsCountLoading,
     eventVenueLoading,
   } = useSelector((state) => state.event);
-  const { sessionsLoading } = useSelector((state) => state.session);
+  const { sessionsLoading, sessionLoading } = useSelector(
+    (state) => state.session
+  );
   const { organizerLoading } = useSelector((state) => state.organizerProfile);
   const { interestedEventsLoading } = useSelector((state) => state.auth);
+  const { fetchBookingsLoading, fetchUserDetailsLoading } = useSelector(
+    (state) => state.user
+  );
   const {
     basicLoading,
     salesLoading,
@@ -75,7 +80,10 @@ function App() {
     categoriesLoading ||
     topSellingLoading ||
     upcomingLoading ||
-    manageEventPageLoading;
+    manageEventPageLoading ||
+    fetchBookingsLoading ||
+    fetchUserDetailsLoading ||
+    sessionLoading;
 
   const hideHeaderFooter = ["/", "/login", "/register"].includes(
     location.pathname

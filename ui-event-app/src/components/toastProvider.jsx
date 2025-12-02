@@ -13,24 +13,25 @@ export default function ToastProvider({ children }) {
     const id = ++toastId;
 
     setToast({ id, type, message, visible: true });
+    if (duration !== Infinity) {
+      // Auto hide
+      setTimeout(() => {
+        setToast((curr) =>
+          curr?.id === id ? { ...curr, visible: false } : curr
+        );
+      }, duration - 300);
 
-    // Auto hide
-    setTimeout(() => {
-      setToast((curr) =>
-        curr?.id === id ? { ...curr, visible: false } : curr
-      );
-    }, duration - 300);
-
-    // Remove from DOM
-    setTimeout(() => {
-      setToast((curr) => (curr?.id === id ? null : curr));
-    }, duration);
+      // Remove from DOM
+      setTimeout(() => {
+        setToast((curr) => (curr?.id === id ? null : curr));
+      }, duration);
+    }
   }, []);
 
   const api = {
     success: (msg, time) => show("success", msg, time),
     error: (msg, time) => show("error", msg, time),
-    loading: (msg, time = 4000) => show("loading", msg, time),
+    loading: (msg) => show("loading", msg, Infinity),
     normal: (msg, time) => show("normal", msg, time),
     hide: () => setToast(null),
   };

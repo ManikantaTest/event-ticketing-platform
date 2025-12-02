@@ -23,16 +23,17 @@ export default function PageLoader() {
       variants={pageVariants}
       transition={pageTransition}
       style={{
-        position: "absolute",
+        position: "fixed",
         top: 0,
         left: 0,
-        right: 0,
-        bottom: 0,
+        width: "100vw",
+        height: "100vh",
+        overflow: "hidden",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "#f7f7f7",
-        zIndex: 9999,
+        zIndex: 999999,
       }}
     >
       <TicketLoader />

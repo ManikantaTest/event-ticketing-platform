@@ -51,6 +51,9 @@ export const sessionSlice = createSlice({
     sessions: [],
     sessionsLoading: false,
     sessionsError: null,
+    sessionSuccess: false,
+    sessionLoading: false,
+    sessionError: null,
     sessionsSuccess: false,
     selectedSession: null,
     updateSessionLoading: false,
@@ -74,17 +77,17 @@ export const sessionSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchSessionById.pending, (state) => {
-        state.loading = true;
-        state.error = null;
+        state.sessionLoading = true;
+        state.sessionError = null;
       })
       .addCase(fetchSessionById.fulfilled, (state, action) => {
-        state.loading = false;
+        state.sessionLoading = false;
         state.selectedSession = action.payload.data;
-        state.error = null;
+        state.sessionSuccess = true;
       })
       .addCase(fetchSessionById.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload || "Something went wrong";
+        state.sessionLoading = false;
+        state.sessionError = action.payload || "Something went wrong";
         state.selectedSession = null;
       });
     builder

@@ -427,7 +427,7 @@ export default function EventSessions() {
         </div>
       </div>
       {paymentStatus && paymentStatus !== "success" && (
-        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex flex-col items-center justify-center gap-4 text-white">
+        <div className="fixed inset-0 z-2000 bg-black/70 backdrop-blur-sm flex flex-col items-center justify-center gap-4 text-white">
           <div className="loader" />
           <p className="text-xl font-semibold">
             {paymentStatus === "initializing" &&

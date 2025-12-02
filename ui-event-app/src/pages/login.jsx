@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import image from "../assets/images/logoGold.png";
 import { auth, googleProvider } from "../config/firebaseConfig";
 import { loginOAuthUser, loginUser } from "../redux/slices/authSlice";
+import { toastRef } from "../components/toastProvider";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -41,7 +42,19 @@ export default function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    dispatch(loginUser(formData)).unwrap();
+
+    // Show toast immediately
+    toastRef.current?.loading("Logging in...");
+
+    try {
+      await dispatch(loginUser(formData)).unwrap();
+
+      // Replace loading with success message
+      toastRef.current?.success("Login successful!");
+    } catch (error) {
+      // Replace loading with error
+      toastRef.current?.error(error.message || "Login failed!");
+    }
   };
 
   useEffect(() => {
@@ -53,12 +66,16 @@ export default function Login() {
 
   const handleGoogleLogin = async () => {
     try {
+      toastRef.current?.loading("Signing in with Google...");
+
       const result = await signInWithPopup(auth, googleProvider);
       const idToken = await result.user.getIdToken();
 
-      // Send idToken to backend
-      dispatch(loginOAuthUser({ googleToken: idToken })).unwrap();
+      await dispatch(loginOAuthUser({ googleToken: idToken })).unwrap();
+
+      toastRef.current?.success("Google Login successful!");
     } catch (err) {
+      toastRef.current?.error("Google Login failed!");
       console.error(err);
     }
   };
