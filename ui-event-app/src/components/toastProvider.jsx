@@ -6,7 +6,7 @@ export const toastRef = { current: null };
 
 let toastId = 0;
 
-export function ToastProvider({ children }) {
+export default function ToastProvider({ children }) {
   const [toast, setToast] = useState(null);
 
   const show = useCallback((type, message, duration = 3000) => {
