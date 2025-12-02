@@ -1,0 +1,30 @@
+# ---------------------------
+# Backend
+# ---------------------------
+server/node_modules/
+server/.env
+server/.env.*
+server/uploads/
+server/logs/
+server/dist/
+server/build/
+
+# ignore seed temp output if any
+server/seed/output/
+server/seed/temp/
+
+# ---------------------------
+# Frontend
+# ---------------------------
+ui-event-app/node_modules/
+ui-event-app/.env
+ui-event-app/.env.*
+ui-event-app/dist/
+ui-event-app/build/
+
+# ---------------------------
+# General
+# ---------------------------
+.DS_Store
+*.log
+.vscode/
