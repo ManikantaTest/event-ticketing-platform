@@ -26,6 +26,7 @@ import {
 import { CheckCircle } from "@mui/icons-material";
 import { Button, CardMedia, InputAdornment, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
+import become_organizer from "../assets/images/become_organizer.jpg";
 
 const categories = [
   {
@@ -357,7 +358,7 @@ export default function HomePage() {
                     <Box flex={0.4} sx={{ minWidth: 280 }}>
                       <CardMedia
                         component="img"
-                        image="https://images.unsplash.com/photo-1540575467063-178a50c2df87"
+                        image={become_organizer}
                         alt="Event organization"
                         sx={{
                           width: "100%",
