@@ -124,7 +124,15 @@ export default function MyInterestsPage() {
       {/* MAIN CARD WRAPPER */}
       <div className="max-w-7xl mx-auto bg-white/80 rounded-3xl shadow-lg border border-gray-100 backdrop-blur-sm px-4 sm:px-6 md:px-8 py-6 md:py-8">
         {/* Tabs row */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+        <div
+          className="
+  flex flex-col
+  items-center text-center lg:items-start lg:text-left
+      /* center for mobile, sm, md */
+  lg:flex-row lg:items-center lg:justify-between 
+  gap-4 mb-6
+"
+        >
           <div>
             <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-1">
               FILTER BY STATUS
@@ -142,11 +150,16 @@ export default function MyInterestsPage() {
                 <button
                   key={item.label}
                   onClick={() => handleChipClick(item.label, idx)}
-                  className={`flex items-center gap-1.5 px-5 py-2 text-sm font-medium rounded-full transition-all duration-300 ${
-                    active
-                      ? "bg-gradient-to-r from-[#ff512f] to-[#dd2476] text-white shadow-md"
-                      : "text-gray-600 hover:bg-gray-200"
-                  }`}
+                  className={`flex items-center gap-1.5 
+                    px-3 py-1.5 text-xs        // Mobile (default)
+                    sm:px-4 sm:py-2 sm:text-sm // Small screens
+                    md:px-5 md:py-2 md:text-sm // Medium & above (normal size)
+                    font-medium rounded-full transition-all duration-300
+                    ${
+                      active
+                        ? "bg-gradient-to-r from-[#ff512f] to-[#dd2476] text-white shadow-md"
+                        : "text-gray-600 hover:bg-gray-200"
+                    }`}
                 >
                   {item.icon}
                   {item.label}
@@ -193,72 +206,107 @@ export default function MyInterestsPage() {
         )}
 
         {/* Event Cards Grid (UNCHANGED) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 items-stretch">
+        {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 items-stretch">
           {events?.length > 0 &&
             events?.map((item, idx) => <EventCard key={idx} item={item} />)}
+        </div> */}
+
+        <div
+          className="
+    grid
+    grid-cols-2
+    sm:grid-cols-2
+    md:grid-cols-3
+    lg:grid-cols-4
+    gap-6
+    items-stretch      /* ensures all cards are equal height */
+  "
+        >
+          {events?.length > 0 &&
+            events.map((item, idx) => <EventCard key={idx} item={item} />)}
         </div>
 
         {/* Pagination (UNCHANGED) */}
         {events?.length > 0 && (
-          <nav
-            aria-label="Page navigation example"
-            className="flex justify-center mt-8"
-          >
-            <ul className="inline-flex -space-x-px text-sm">
-              {/* Prev Button */}
-              <li>
-                <button
-                  onClick={handlePrevPage}
-                  disabled={page === 1}
-                  className="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 disabled:opacity-50"
-                >
-                  Previous
-                </button>
-              </li>
+          <div className="flex justify-center mt-10">
+            <nav>
+              <ul className="inline-flex gap-1 text-xs md:text-sm">
+                {/* Prev */}
+                <li>
+                  <button
+                    onClick={handlePrevPage}
+                    disabled={page === 1}
+                    className="
+        px-2.5 md:px-4 
+        h-8 md:h-10 
+        flex items-center justify-center 
+        rounded-md md:rounded-lg
+        bg-white border border-gray-300 text-gray-600
+        hover:bg-gray-100 disabled:opacity-50
+      "
+                  >
+                    Previous
+                  </button>
+                </li>
 
-              {/* Page Numbers (only 7 visible at a time) */}
-              {(() => {
-                const maxVisible = 7;
-                let start = Math.max(1, page - Math.floor(maxVisible / 2));
-                let end = start + maxVisible - 1;
+                {/* Page Numbers */}
+                {(() => {
+                  const maxVisible = 7;
+                  let start = Math.max(1, page - Math.floor(maxVisible / 2));
+                  let end = start + maxVisible - 1;
 
-                if (end > totalPages) {
-                  end = totalPages;
-                  start = Math.max(1, end - maxVisible + 1);
-                }
+                  if (end > totalPages) {
+                    end = totalPages;
+                    start = Math.max(1, end - maxVisible + 1);
+                  }
 
-                return Array.from(
-                  { length: end - start + 1 },
-                  (_, i) => start + i
-                ).map((num) => (
-                  <li key={num}>
-                    <button
-                      onClick={() => setPage(num)}
-                      aria-current={num === page ? "page" : undefined}
-                      className={`flex items-center justify-center px-4 h-10 leading-tight border ${
-                        num === page
-                          ? "text-blue-600 bg-blue-50 border-gray-300 hover:bg-blue-100 hover:text-blue-700"
-                          : "text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-                      }`}
-                    >
-                      {num}
-                    </button>
-                  </li>
-                ));
-              })()}
+                  return Array.from(
+                    { length: end - start + 1 },
+                    (_, i) => start + i
+                  ).map((num) => (
+                    <li key={num}>
+                      <button
+                        onClick={() => setPage(num)}
+                        aria-current={num === page ? "page" : undefined}
+                        className={`
+              px-2.5 md:px-4 
+              h-8 md:h-10 
+              flex items-center justify-center 
+              rounded-md md:rounded-lg
+              border transition
+              ${
+                num === page
+                  ? "bg-pink-50 text-pink-600 border-pink-300"
+                  : "bg-white text-gray-600 border-gray-300 hover:bg-gray-100"
+              }
+            `}
+                      >
+                        {num}
+                      </button>
+                    </li>
+                  ));
+                })()}
 
-              {/* Next Button */}
-              <li>
-                <button
-                  onClick={handleNextPage}
-                  disabled={page === totalPages}
-                  className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 disabled:opacity-50"
-                >
-                  Next
-                </button>
-              </li>
-            </ul>
-          </nav>
+                {/* Next */}
+                <li>
+                  <button
+                    onClick={handleNextPage}
+                    disabled={page === totalPages}
+                    className="
+        px-2.5 md:px-4 
+        h-8 md:h-10 
+        flex items-center justify-center 
+        rounded-md md:rounded-lg
+        bg-white border border-gray-300 text-gray-600
+        hover:bg-gray-100 disabled:opacity-50
+      "
+                  >
+                    Next
+                  </button>
+                </li>
+              </ul>
+            </nav>
+          </div>
         )}
       </div>
     </div>

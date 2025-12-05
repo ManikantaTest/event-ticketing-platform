@@ -86,14 +86,17 @@ function OrganizerProfile() {
 
   return (
     <div
-      className="font-sans min-h-screen p-4 md:p-6 lg:p-8"
+      className="
+    font-sans min-h-screen 
+    p-3 md:p-4 lg:p-8
+  "
       style={{
         background:
           "linear-gradient(to bottom, #e8edff 0%, #f4f6ff 25%, #ffffff 100%)",
       }}
     >
-      {/* Banner with Profile Image Overlay */}
-      <div className="relative h-[420px] max-w-7xl mx-auto overflow-hidden rounded-xl shadow-lg">
+      {/* Banner */}
+      <div className="relative h-[260px] sm:h-[320px] md:h-[420px] max-w-7xl mx-auto overflow-hidden rounded-lg sm:rounded-xl shadow-lg">
         <img
           src={organizer?.organizerBannerImage}
           alt="Organizer Banner"
@@ -102,19 +105,18 @@ function OrganizerProfile() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
 
         {/* Info Overlay */}
-        <div className="absolute bottom-6 left-6 text-white space-y-3">
-          {/* Organizer Name */}
-          <h1 className="text-3xl md:text-4xl font-extrabold">
+        <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 text-white space-y-2 sm:space-y-3">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight">
             {organizer?.orgName || "Organizer Name"}
           </h1>
 
           {/* Rating */}
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-1 sm:space-x-2">
             <div className="flex">
               {[1, 2, 3, 4, 5].map((star) => (
                 <span
                   key={star}
-                  className={`material-symbols-outlined ${
+                  className={`material-symbols-outlined text-base sm:text-lg md:text-xl ${
                     star <= organizer?.averageRating
                       ? "text-amber-400"
                       : "text-gray-300"
@@ -124,10 +126,10 @@ function OrganizerProfile() {
                 </span>
               ))}
             </div>
-            <span className="font-bold">
+            <span className="font-bold text-sm sm:text-base">
               {organizer?.averageRating || "4.8"}
             </span>
-            <span className="text-sm text-gray-200">
+            <span className="text-xs sm:text-sm text-gray-200">
               {"(" + organizer?.totalReviews + " reviews)" || 124}
             </span>
           </div>
@@ -135,23 +137,25 @@ function OrganizerProfile() {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto mt-12 grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Left/Main Section */}
-        <div className="lg:col-span-2 space-y-8">
-          {/* About Us */}
-          <section className="bg-white p-6 rounded-2xl shadow-md">
-            <h2 className="text-2xl font-bold mb-3 text-gray-800">About Us</h2>
-            <p className="text-gray-700 leading-relaxed text-justify">
+      <div className="max-w-7xl mx-auto mt-6 sm:mt-10 grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+        {/* Left Section */}
+        <div className="lg:col-span-2 space-y-6 sm:space-y-8">
+          <section className="bg-white p-4 sm:p-6 rounded-xl sm:rounded-2xl shadow-md">
+            <h2 className="text-xl sm:text-2xl font-bold mb-3 text-gray-800">
+              About Us
+            </h2>
+            <p className="text-sm sm:text-base text-gray-700 leading-relaxed text-justify">
               {organizer?.orgDescription || "No description available."}
             </p>
-            <h2 className="text-2xl font-bold mt-3 mb-5 text-gray-800">
+
+            <h2 className="text-xl sm:text-2xl font-bold mt-4 mb-4 text-gray-800">
               Specialities
             </h2>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-1.5 sm:gap-2">
               {organizer?.orgSpecialities?.map((cat) => (
                 <span
                   key={cat}
-                  className="bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded text-xs font-medium"
+                  className="bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded text-xs sm:text-sm font-medium"
                 >
                   {cat}
                 </span>
@@ -162,38 +166,46 @@ function OrganizerProfile() {
 
         {/* Right Sidebar */}
         <div>
-          <section className="bg-white p-6 rounded-2xl shadow-md">
-            <h3 className="text-lg font-bold text-gray-900 mb-4">
+          <section className="bg-white p-4 sm:p-6 rounded-xl sm:rounded-2xl shadow-md">
+            <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-3 sm:mb-4">
               Contact Information
             </h3>
-            <div className="space-y-3 text-gray-700">
+
+            <div className="space-y-2.5 sm:space-y-3 text-gray-700 text-sm sm:text-base">
               <div className="flex items-center space-x-2">
-                <Mail className="w-5 h-5 text-gray-500" />
+                <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-gray-500" />
                 <span>{organizer?.orgEmail || "N/A"}</span>
               </div>
               <div className="flex items-center space-x-2">
-                <Phone className="w-5 h-5 text-gray-500" />
+                <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-gray-500" />
                 <span>{organizer?.phone || "N/A"}</span>
               </div>
             </div>
 
-            <div className="my-4 border-t border-gray-200"></div>
+            <div className="my-3 sm:my-4 border-t border-gray-200"></div>
 
             {/* Social Media */}
-            <h3 className="text-sm font-bold text-gray-900 mb-2">
+            <h3 className="text-xs sm:text-sm font-bold text-gray-900 mb-2">
               Social Media
             </h3>
             <div className="flex space-x-2">
-              <button className="p-2 bg-gray-100 rounded-full hover:bg-gray-200">
+              {/* {[Facebook, Instagram, Linkedin, Twitter].map((Icon, index) => (
+                <button
+                  key={index}
+                  className="p-1.5 sm:p-2 bg-gray-100 rounded-full hover:bg-gray-200"
+                >
+                  <Icon className="w-4 h-4 text-gray-600" />
+                </button> */}
+              <button className="p-1.5 sm:p-2 bg-gray-100 rounded-full hover:bg-gray-200">
                 <Facebook className="w-4 h-4 text-blue-600" />
               </button>
-              <button className="p-2 bg-gray-100 rounded-full hover:bg-gray-200">
+              <button className="p-1.5 sm:p-2 bg-gray-100 rounded-full hover:bg-gray-200">
                 <Instagram className="w-4 h-4 text-pink-500" />
               </button>
-              <button className="p-2 bg-gray-100 rounded-full hover:bg-gray-200">
+              <button className="p-1.5 sm:p-2 bg-gray-100 rounded-full hover:bg-gray-200">
                 <Linkedin className="w-4 h-4 text-blue-700" />
               </button>
-              <button className="p-2 bg-gray-100 rounded-full hover:bg-gray-200">
+              <button className="p-1.5 sm:p-2 bg-gray-100 rounded-full hover:bg-gray-200">
                 <Twitter className="w-4 h-4 text-sky-500" />
               </button>
             </div>
@@ -259,7 +271,7 @@ function OrganizerProfile() {
               <div className="animate-spin rounded-full h-8 w-8 border-4 border-gray-300 border-t-pink-500"></div>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {organizerEvents?.data?.map((event) => (
                 <EventCard key={event._id} item={event} />
               ))}
@@ -267,19 +279,22 @@ function OrganizerProfile() {
           )}
 
           {/* Pagination */}
-          <div className="flex justify-center mt-12">
+          <div className="flex justify-center mt-10">
             <nav>
-              <ul className="inline-flex gap-1 text-sm">
+              <ul className="inline-flex gap-1 text-xs md:text-sm">
                 {/* Prev */}
                 <li>
                   <button
                     onClick={handlePrevPage}
                     disabled={page === 1}
                     className="
-              px-4 h-10 flex items-center justify-center rounded-lg
-              bg-white border border-gray-300 text-gray-600
-              hover:bg-gray-100 disabled:opacity-50
-            "
+            px-2.5 md:px-4 
+            h-8 md:h-10 
+            flex items-center justify-center 
+            rounded-md md:rounded-lg
+            bg-white border border-gray-300 text-gray-600
+            hover:bg-gray-100 disabled:opacity-50
+          "
                   >
                     Previous
                   </button>
@@ -305,8 +320,11 @@ function OrganizerProfile() {
                         onClick={() => setPage(num)}
                         aria-current={num === page ? "page" : undefined}
                         className={`
-                  px-4 h-10 flex items-center justify-center rounded-lg border
-                  transition
+                  px-2.5 md:px-4 
+                  h-8 md:h-10 
+                  flex items-center justify-center 
+                  rounded-md md:rounded-lg
+                  border transition
                   ${
                     num === page
                       ? "bg-pink-50 text-pink-600 border-pink-300"
@@ -326,10 +344,13 @@ function OrganizerProfile() {
                     onClick={handleNextPage}
                     disabled={page === totalPages}
                     className="
-              px-4 h-10 flex items-center justify-center rounded-lg
-              bg-white border border-gray-300 text-gray-600
-              hover:bg-gray-100 disabled:opacity-50
-            "
+            px-2.5 md:px-4 
+            h-8 md:h-10 
+            flex items-center justify-center 
+            rounded-md md:rounded-lg
+            bg-white border border-gray-300 text-gray-600
+            hover:bg-gray-100 disabled:opacity-50
+          "
                   >
                     Next
                   </button>

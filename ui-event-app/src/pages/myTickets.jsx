@@ -35,42 +35,64 @@ function TicketModal({ ticket, onClose }) {
 
   return (
     <div
-      className="fixed inset-0 bg-black/50 flex items-center justify-center z-1200 p-4"
+      className="fixed inset-0 bg-black/50 flex items-center justify-center z-[1200] p-4"
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-3xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto relative border border-gray-200 flex"
+        className="
+        bg-white rounded-3xl shadow-2xl 
+        w-full max-w-3xl max-h-[90vh] 
+        overflow-y-auto relative border border-gray-200 
+        flex flex-col sm:flex-row
+      "
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 bg-gray-800/70 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-gray-900 transition cursor-pointer"
+          className="
+          absolute top-3 right-3 
+          bg-gray-800/70 text-white 
+          rounded-full w-8 h-8 
+          flex items-center justify-center 
+          hover:bg-gray-900 transition cursor-pointer
+        "
         >
           ✕
         </button>
 
-        {/* Left: QR Code */}
-        <div className="flex-none p-6 bg-gray-50 flex items-center justify-center rounded-l-3xl">
+        {/* QR Block */}
+        <div
+          className="
+          flex-none 
+          p-4 sm:p-6 
+          bg-gray-50 
+          flex items-center justify-center 
+          rounded-t-3xl sm:rounded-t-none sm:rounded-l-3xl
+          w-full sm:w-auto
+        "
+        >
           <QRCodeCanvas
             id="ticket-qr"
             value={ticket.code}
-            size={180}
+            size={130}
+            className="sm:size-[180px] shadow-lg rounded-xl p-2 bg-white"
             fgColor="#1e1e24"
             level="H"
-            className="shadow-lg rounded-xl p-2 bg-white"
           />
         </div>
 
-        {/* Right: Info */}
-        <div className="flex-1 p-6 flex flex-col justify-between">
+        {/* Right side content */}
+        <div className="flex-1 p-4 sm:p-6 flex flex-col justify-between">
+          {/* Info Section */}
           <div>
-            {/* Header */}
-            <div className="mb-4">
-              <h2 className="text-2xl font-bold text-gray-900">
+            {/* Title + Date */}
+            <div className="mb-4 text-center sm:text-left">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
                 {ticket.title}
               </h2>
-              <p className="text-sm text-gray-600 mt-1">
+
+              <p className="text-xs sm:text-sm text-gray-600 mt-1">
                 {new Date(ticket.date).toLocaleDateString(undefined, {
                   dateStyle: "medium",
                 })}{" "}
@@ -82,7 +104,9 @@ function TicketModal({ ticket, onClose }) {
                   hour12: true,
                 })}
               </p>
-              <div className="flex items-center gap-2 mt-2 text-gray-600">
+
+              {/* Venue */}
+              <div className="flex items-center justify-center sm:justify-start gap-2 mt-2 text-gray-600">
                 <svg
                   width="18"
                   height="18"
@@ -94,30 +118,32 @@ function TicketModal({ ticket, onClose }) {
                   <path d="M12 2a7 7 0 0 1 7 7c0 4.5-7 13-7 13S5 13.5 5 9a7 7 0 0 1 7-7z" />
                   <circle cx="12" cy="9" r="2.5" />
                 </svg>
-                <p className="text-sm font-medium">{ticket.venue}</p>
+                <p className="text-xs sm:text-sm font-medium">{ticket.venue}</p>
               </div>
             </div>
 
-            {/* Booking Info */}
-            <div className="mb-3">
+            {/* Booking ID */}
+            <div className="mb-3 text-center sm:text-left">
               <p className="text-xs text-gray-400 uppercase tracking-wide">
                 Booking ID
               </p>
-              <p className="text-sm font-mono font-semibold text-gray-800 bg-gray-100 px-3 py-1 rounded mt-1 inline-block">
+
+              <p className="text-xs sm:text-sm font-mono font-semibold text-gray-800 bg-gray-100 px-3 py-1 rounded mt-1 inline-block">
                 {ticket.code}
               </p>
             </div>
 
             {/* Seats */}
-            <div className="mb-3">
+            <div className="mb-3 text-center sm:text-left">
               <p className="text-xs text-gray-400 uppercase tracking-wide">
                 Seats
               </p>
-              <div className="flex flex-wrap gap-2 mt-1">
+
+              <div className="flex flex-wrap justify-center sm:justify-start gap-2 mt-1">
                 {ticket.seats.map((s, i) => (
                   <span
                     key={i}
-                    className="bg-purple-50 text-purple-700 px-2 py-1 rounded-md text-sm font-semibold shadow-sm"
+                    className="bg-purple-50 text-purple-700 px-2 py-1 text-xs sm:text-sm rounded-md shadow-sm font-semibold"
                   >
                     {s.section} • {s.seatIds.join(", ")}
                   </span>
@@ -126,24 +152,34 @@ function TicketModal({ ticket, onClose }) {
             </div>
 
             {/* Total Paid */}
-            <div className="mb-3">
+            <div className="mb-3 text-center sm:text-left">
               <p className="text-xs text-gray-400 uppercase tracking-wide">
                 Total Paid
               </p>
-              <p className="text-purple-700 font-bold text-lg">
+
+              <p className="text-purple-700 font-bold text-base sm:text-lg">
                 ₹{ticket.totalAmount.toLocaleString()}
               </p>
             </div>
           </div>
 
-          {/* Actions */}
-          <div className="flex gap-3 mt-4">
+          {/* Buttons */}
+          <div className="flex flex-col sm:flex-row gap-3 mt-4">
             <button
               onClick={downloadPDF}
-              className="flex-1 px-4 py-2 rounded-lg bg-gradient-to-r from-[#9c27b0] to-[#e91e63] text-white font-semibold shadow hover:scale-105 transition cursor-pointer"
+              className="
+              px-3 py-1.5 text-xs 
+              sm:px-4 sm:py-2 sm:text-sm
+              rounded-lg font-semibold shadow
+              bg-gradient-to-r from-[#9c27b0] to-[#e91e63] 
+              text-white 
+              hover:scale-105 transition cursor-pointer
+              w-full sm:w-auto
+            "
             >
               Download Ticket
             </button>
+
             <button
               onClick={() => {
                 navigator.share
@@ -154,14 +190,21 @@ function TicketModal({ ticket, onClose }) {
                     })
                   : alert("Sharing not supported on this device");
               }}
-              className="flex-1 px-4 py-2 rounded-lg bg-gray-200 text-gray-700 font-semibold shadow hover:bg-gray-300 transition cursor-pointer"
+              className="
+              px-3 py-1.5 text-xs 
+              sm:px-4 sm:py-2 sm:text-sm
+              rounded-lg font-semibold shadow
+              bg-gray-200 text-gray-700 
+              hover:bg-gray-300 transition cursor-pointer
+              w-full sm:w-auto
+            "
             >
               Share
             </button>
           </div>
 
           {/* Terms */}
-          <div className="mt-2 text-xs text-gray-500 space-y-1">
+          <div className="mt-2 text-center sm:text-left text-xs text-gray-500 space-y-1">
             <p>No cancellations or refunds allowed.</p>
             <p>Entry closes 15 minutes before the event starts.</p>
           </div>
@@ -173,54 +216,64 @@ function TicketModal({ ticket, onClose }) {
 
 function TicketCard({ ticket, onOpen }) {
   const isPast = ticket.status === "past";
+  console.log("ff", ticket);
 
   return (
     <div
-      className={`relative flex bg-white rounded-2xl border border-[#e5e5e5] shadow-sm mb-6 max-w-3xl w-full mx-auto overflow-hidden 
-                  transition-all duration-200 hover:shadow-lg ${
-                    isPast ? "opacity-70" : ""
-                  }`}
+      className={`relative flex flex-col sm:flex-row 
+        bg-white rounded-2xl border border-[#e5e5e5] shadow-sm 
+        mb-6 w-full max-w-3xl mx-auto overflow-hidden 
+        transition-all duration-200 hover:shadow-lg 
+        ${isPast ? "opacity-70" : ""}`}
     >
       {/* Left: Event Image */}
-      <div className="relative min-w-[140px] max-w-[200px] flex-shrink-0">
+      <div
+        className="
+    relative 
+    w-full sm:w-[180px]
+    aspect-[16/9] sm:aspect-auto   /* horizontal on mobile, natural on desktop */
+    overflow-hidden
+    flex-shrink-0
+  "
+      >
         <img
-          src={ticket.image || "/default-event.jpg"}
+          src={ticket.thumbnailImage || "/default-event.jpg"}
           alt={ticket.title}
-          className={`h-full w-full object-cover ${
-            isPast ? "grayscale brightness-90" : ""
-          }`}
+          className={`
+      w-full h-full object-cover
+      ${isPast ? "grayscale brightness-90" : ""}
+    `}
         />
       </div>
 
       {/* Right */}
       <div className="flex flex-col justify-between flex-1 min-w-0">
-        <div className="px-6 py-5">
+        <div className="px-4 sm:px-6 py-4">
           <h3
-            className={`truncate font-bold text-xl mb-2 ${
+            className={`truncate font-bold text-lg sm:text-xl mb-2 ${
               isPast ? "text-gray-500" : "text-[#1e1e24]"
             }`}
           >
             {ticket.title}
           </h3>
+
           <p className="text-sm text-gray-600 mb-1">
             {new Date(ticket.date).toLocaleDateString(undefined, {
               dateStyle: "medium",
             })}{" "}
             {new Date(`1970-01-01T${ticket.startTime}:00`).toLocaleTimeString(
               [],
-              {
-                hour: "2-digit",
-                minute: "2-digit",
-                hour12: true,
-              }
+              { hour: "2-digit", minute: "2-digit", hour12: true }
             )}
           </p>
+
           <p className="text-sm text-gray-600 mb-2">📍 {ticket.venue}</p>
 
           <div className="flex flex-wrap gap-2 text-sm mt-2">
             <span className="bg-[#f5f5f5] text-[#444] px-2 py-0.5 rounded-md font-mono font-medium text-xs shadow-sm">
               Booking #{ticket.code}
             </span>
+
             {ticket.seats.map((s, i) => (
               <span
                 key={i}
@@ -233,15 +286,16 @@ function TicketCard({ ticket, onOpen }) {
         </div>
 
         {/* Button */}
-        <div className="flex justify-end px-6 py-4">
+        <div className="flex justify-end px-4 sm:px-6 py-4">
           <button
             onClick={() => !isPast && onOpen(ticket)}
             className={`rounded-lg px-5 py-2 text-sm font-semibold shadow 
-                ${
-                  isPast
-                    ? "bg-gray-200 text-gray-500 cursor-not-allowed"
-                    : "bg-gradient-to-r from-[#9c27b0] to-[#e91e63] text-white hover:scale-105 hover:shadow-md transition cursor-pointer"
-                }`}
+              w-full sm:w-auto
+              ${
+                isPast
+                  ? "bg-gray-200 text-gray-500 cursor-not-allowed"
+                  : "bg-gradient-to-r from-[#9c27b0] to-[#e91e63] text-white hover:scale-105 hover:shadow-md transition cursor-pointer"
+              }`}
             disabled={isPast}
           >
             {isPast ? "View Details" : "Open Ticket"}
@@ -302,7 +356,8 @@ export default function MyTicketsStyled() {
           seatIds: ids,
         })),
         code: b._id.slice(-6).toUpperCase(),
-        image: b.event.thumbnailImage,
+        bannerImage: b.event.bannerImage,
+        thumbnailImage: b.event.thumbnailImage,
         status,
         totalAmount: b.totalAmount,
       };

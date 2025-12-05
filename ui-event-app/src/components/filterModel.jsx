@@ -109,28 +109,53 @@ export default function FilterModal({
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 40, opacity: 0 }}
             transition={{ type: "spring", stiffness: 260, damping: 22 }}
-            className="relative w-full max-w-5xl h-[80vh] bg-white rounded-3xl shadow-2xl flex overflow-hidden"
+            className="
+    relative w-full 
+    max-w-full sm:max-w-3xl md:max-w-5xl
+    h-[75vh] sm:h-[80vh]
+    bg-white 
+    rounded-2xl sm:rounded-3xl 
+    shadow-2xl flex overflow-hidden
+  "
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Sidebar (Light) */}
-            <div className="w-1/4 min-w-[180px] bg-white border-r border-gray-200 flex flex-col py-6 px-3">
-              <div className="px-3 mb-5">
-                <h2 className="text-lg font-semibold text-gray-900">Filters</h2>
-                <p className="text-xs text-gray-500 mt-1">
+            {/* SIDEBAR */}
+            <div
+              className="
+    w-1/3 sm:w-1/4 
+    min-w-[130px] sm:min-w-[180px] 
+    bg-white border-r border-gray-200 
+    flex flex-col 
+    py-4 sm:py-6 
+    px-2 sm:px-3
+  "
+            >
+              <div className="px-2 sm:px-3 mb-3 sm:mb-5">
+                <h2 className="text-base sm:text-lg font-semibold text-gray-900">
+                  Filters
+                </h2>
+                <p className="text-[10px] sm:text-xs text-gray-500 mt-1">
                   Refine events by type, time and more.
                 </p>
               </div>
 
-              <div className="flex flex-col gap-1 mt-2">
+              <div className="flex flex-col gap-1 mt-1 sm:mt-2">
                 {tabs.map((tab) => (
                   <button
                     key={tab}
                     onClick={() => setActiveTab(tab)}
-                    className={`w-full text-left flex items-center gap-2 my-0.5 py-2.5 px-4 rounded-xl text-sm transition-all ${
-                      activeTab === tab
-                        ? "bg-pink-50 text-pink-700 font-semibold border border-pink-200 shadow-sm"
-                        : "text-gray-700 hover:bg-gray-100"
-                    }`}
+                    className={`
+            w-full text-left flex items-center gap-2 
+            py-2 sm:py-2.5 px-3 sm:px-4 
+            rounded-lg sm:rounded-xl 
+            text-xs sm:text-sm
+            transition-all
+            ${
+              activeTab === tab
+                ? "bg-pink-50 text-pink-700 font-semibold border border-pink-200 shadow-sm"
+                : "text-gray-700 hover:bg-gray-100"
+            }
+          `}
                   >
                     {tab}
                   </button>
@@ -138,42 +163,48 @@ export default function FilterModal({
               </div>
             </div>
 
-            {/* Content + Footer */}
+            {/* CONTENT AREA */}
             <div className="flex flex-col flex-1 overflow-hidden bg-white">
-              {/* Header */}
-              <div className="px-8 pt-6 pb-2 border-b border-gray-200">
-                <h3 className="text-lg font-semibold text-gray-900">
+              {/* HEADER */}
+              <div className="px-4 sm:px-8 pt-4 sm:pt-6 pb-2 border-b border-gray-200">
+                <h3 className="text-base sm:text-lg font-semibold text-gray-900">
                   {activeTab}
                 </h3>
-                <p className="text-xs text-gray-500 mt-1">
+                <p className="text-[10px] sm:text-xs text-gray-500 mt-1">
                   Choose options to fine-tune your search.
                 </p>
               </div>
 
-              {/* Content Body */}
-              <div className="flex-1 overflow-y-auto px-8 py-6">
-                {/* Recurrence */}
+              {/* BODY */}
+              <div className="flex-1 overflow-y-auto px-4 sm:px-8 py-4 sm:py-6">
+                {/* RECURRENCE */}
                 {activeTab === "Recurrence" && (
                   <Section label="Recurrence">
                     <div className="flex flex-col gap-3">
                       {recurrences.map((r) => (
                         <label
                           key={r}
-                          className={`flex items-center justify-between gap-3 rounded-xl border px-4 py-3 cursor-pointer transition-all ${
-                            localSelected.recurrence === r
-                              ? "border-pink-500 bg-pink-50 text-pink-700"
-                              : "border-gray-200 bg-white hover:bg-gray-50"
-                          }`}
+                          className={`
+                  flex items-center justify-between gap-2 sm:gap-3 
+                  rounded-lg sm:rounded-xl border 
+                  px-3 sm:px-4 py-2.5 sm:py-3 
+                  cursor-pointer transition-all 
+                  ${
+                    localSelected.recurrence === r
+                      ? "border-pink-500 bg-pink-50 text-pink-700"
+                      : "border-gray-200 bg-white hover:bg-gray-50"
+                  }
+                `}
                         >
-                          <div className="flex items-center gap-3">
+                          <div className="flex items-center gap-2 sm:gap-3">
                             <input
                               type="radio"
                               name="recurrence"
                               checked={localSelected.recurrence === r}
                               onChange={() => setSingleSelect("recurrence", r)}
-                              className="h-5 w-5 accent-pink-600"
+                              className="h-4 w-4 sm:h-5 sm:w-5 accent-pink-600"
                             />
-                            <span className="font-medium text-gray-800">
+                            <span className="font-medium text-gray-800 text-xs sm:text-sm">
                               {r}
                             </span>
                           </div>
@@ -183,27 +214,33 @@ export default function FilterModal({
                   </Section>
                 )}
 
-                {/* Category */}
+                {/* CATEGORY */}
                 {activeTab === "Category" && (
                   <Section label="Category">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[320px] overflow-y-auto pr-1">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[320px] pr-1">
                       {categories.map((c) => (
                         <label
                           key={c}
-                          className={`flex items-center justify-between gap-3 rounded-xl border px-4 py-3 cursor-pointer transition-all ${
-                            localSelected.category.includes(c)
-                              ? "border-pink-500 bg-pink-50 text-pink-700"
-                              : "border-gray-200 bg-white hover:bg-gray-50"
-                          }`}
+                          className={`
+                  flex items-center justify-between gap-2 sm:gap-3 
+                  rounded-lg sm:rounded-xl border 
+                  px-3 sm:px-4 py-2.5 sm:py-3 
+                  cursor-pointer transition-all 
+                  ${
+                    localSelected.category.includes(c)
+                      ? "border-pink-500 bg-pink-50 text-pink-700"
+                      : "border-gray-200 bg-white hover:bg-gray-50"
+                  }
+                `}
                         >
-                          <div className="flex items-center gap-3">
+                          <div className="flex items-center gap-2 sm:gap-3">
                             <input
                               type="checkbox"
                               checked={localSelected.category.includes(c)}
                               onChange={() => toggleMultiSelect("category", c)}
                               className="h-4 w-4 accent-pink-600"
                             />
-                            <span className="font-medium text-gray-800">
+                            <span className="font-medium text-gray-800 text-xs sm:text-sm">
                               {c}
                             </span>
                           </div>
@@ -213,28 +250,34 @@ export default function FilterModal({
                   </Section>
                 )}
 
-                {/* Age Limit */}
+                {/* AGE LIMIT */}
                 {activeTab === "Age Limit" && (
                   <Section label="Age Limit">
                     <div className="flex flex-col gap-3">
                       {ageLimits.map((a) => (
                         <label
                           key={a}
-                          className={`flex items-center justify-between gap-3 rounded-xl border px-4 py-3 cursor-pointer transition-all ${
-                            localSelected.ageLimit === a
-                              ? "border-pink-500 bg-pink-50 text-pink-700"
-                              : "border-gray-200 bg-white hover:bg-gray-50"
-                          }`}
+                          className={`
+                  flex items-center justify-between gap-2 sm:gap-3 
+                  rounded-lg sm:rounded-xl border 
+                  px-3 sm:px-4 py-2.5 sm:py-3 
+                  cursor-pointer transition-all 
+                  ${
+                    localSelected.ageLimit === a
+                      ? "border-pink-500 bg-pink-50 text-pink-700"
+                      : "border-gray-200 bg-white hover:bg-gray-50"
+                  }
+                `}
                         >
-                          <div className="flex items-center gap-3">
+                          <div className="flex items-center gap-2 sm:gap-3">
                             <input
                               type="radio"
                               name="ageLimit"
                               checked={localSelected.ageLimit === a}
                               onChange={() => setSingleSelect("ageLimit", a)}
-                              className="h-5 w-5 accent-pink-600"
+                              className="h-4 w-4 sm:h-5 sm:w-5 accent-pink-600"
                             />
-                            <span className="font-medium text-gray-800">
+                            <span className="font-medium text-gray-800 text-xs sm:text-sm">
                               {a}
                             </span>
                           </div>
@@ -244,7 +287,7 @@ export default function FilterModal({
                   </Section>
                 )}
 
-                {/* Language */}
+                {/* LANGUAGE */}
                 {activeTab === "Language" && (
                   <Section label="Languages">
                     <div className="flex flex-wrap gap-2">
@@ -255,11 +298,17 @@ export default function FilterModal({
                             key={l}
                             type="button"
                             onClick={() => toggleMultiSelect("language", l)}
-                            className={`px-3 py-1.5 rounded-full text-sm border transition-all ${
-                              selected
-                                ? "bg-pink-100 border-pink-400 text-pink-700 font-semibold"
-                                : "bg-white border-gray-200 text-gray-700 hover:bg-gray-100"
-                            }`}
+                            className={`
+                    px-2.5 sm:px-3 py-1.5 
+                    rounded-full 
+                    text-xs sm:text-sm 
+                    border transition-all 
+                    ${
+                      selected
+                        ? "bg-pink-100 border-pink-400 text-pink-700 font-semibold"
+                        : "bg-white border-gray-200 text-gray-700 hover:bg-gray-100"
+                    }
+                  `}
                           >
                             {l}
                           </button>
@@ -269,28 +318,34 @@ export default function FilterModal({
                   </Section>
                 )}
 
-                {/* Rating */}
+                {/* RATING */}
                 {activeTab === "Rating" && (
                   <Section label="Rating">
                     <div className="flex flex-col gap-3">
                       {ratings.map((r) => (
                         <label
                           key={r}
-                          className={`flex items-center justify-between gap-3 rounded-xl border px-4 py-3 cursor-pointer transition-all ${
-                            localSelected.rating === r
-                              ? "border-pink-500 bg-pink-50 text-pink-700"
-                              : "border-gray-200 bg-white hover:bg-gray-50"
-                          }`}
+                          className={`
+                  flex items-center justify-between gap-2 sm:gap-3 
+                  rounded-lg sm:rounded-xl border 
+                  px-3 sm:px-4 py-2.5 sm:py-3 
+                  cursor-pointer transition-all 
+                  ${
+                    localSelected.rating === r
+                      ? "border-pink-500 bg-pink-50 text-pink-700"
+                      : "border-gray-200 bg-white hover:bg-gray-50"
+                  }
+                `}
                         >
-                          <div className="flex items-center gap-3">
+                          <div className="flex items-center gap-2 sm:gap-3">
                             <input
                               type="radio"
                               name="rating"
                               checked={localSelected.rating === r}
                               onChange={() => setSingleSelect("rating", r)}
-                              className="h-5 w-5 accent-pink-600"
+                              className="h-4 w-4 sm:h-5 sm:w-5 accent-pink-600"
                             />
-                            <span className="font-medium text-gray-800">
+                            <span className="font-medium text-gray-800 text-xs sm:text-sm">
                               ⭐ {r}+
                             </span>
                           </div>
@@ -300,7 +355,7 @@ export default function FilterModal({
                   </Section>
                 )}
 
-                {/* Date Range */}
+                {/* DATE RANGE */}
                 {activeTab === "Date Range" && (
                   <Section label="Date Range">
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -325,9 +380,7 @@ export default function FilterModal({
                             <TextField {...params} size="small" />
                           )}
                         />
-
                         <span className="font-semibold text-gray-500">to</span>
-
                         <DatePicker
                           label="End Date"
                           value={
@@ -353,7 +406,7 @@ export default function FilterModal({
                   </Section>
                 )}
 
-                {/* Time Range */}
+                {/* TIME RANGE */}
                 {activeTab === "Time Range" && (
                   <Section label="Time Range">
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -419,25 +472,42 @@ export default function FilterModal({
                 )}
               </div>
 
-              {/* Footer Buttons */}
-              <div className="p-6 flex justify-between items-center border-t border-gray-200 bg-white">
+              {/* FOOTER */}
+              <div className="p-4 sm:p-6 flex justify-between items-center border-t border-gray-200 bg-white">
                 <button
                   onClick={handleClear}
-                  className="text-gray-700 text-sm font-medium underline underline-offset-4 hover:text-gray-900"
+                  className="text-gray-700 text-xs sm:text-sm font-medium underline underline-offset-4 hover:text-gray-900"
                 >
                   Clear filters
                 </button>
 
-                <div className="flex gap-3">
+                <div className="flex gap-2 sm:gap-3">
                   <button
                     onClick={onClose}
-                    className="px-5 py-2.5 rounded-lg border border-gray-300 bg-white text-gray-700 text-sm font-medium hover:bg-gray-100"
+                    className="
+            px-3 sm:px-5 
+            py-1.5 sm:py-2.5 
+            rounded-lg border border-gray-300 
+            bg-white text-gray-700 
+            text-xs sm:text-sm 
+            font-medium 
+            hover:bg-gray-100
+          "
                   >
                     Cancel
                   </button>
+
                   <button
                     onClick={handleApply}
-                    className="px-8 py-2.5 rounded-lg bg-gradient-to-r from-pink-500 to-rose-500 text-white text-sm font-semibold shadow hover:opacity-90"
+                    className="
+            px-5 sm:px-8 
+            py-1.5 sm:py-2.5 
+            rounded-lg 
+            bg-gradient-to-r from-pink-500 to-rose-500 
+            text-white 
+            text-xs sm:text-sm font-semibold shadow 
+            hover:opacity-90
+          "
                   >
                     Apply Filters
                   </button>
@@ -445,12 +515,19 @@ export default function FilterModal({
               </div>
             </div>
 
-            {/* Close Button */}
+            {/* CLOSE BUTTON */}
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 p-2 rounded-full bg-white shadow text-gray-500 hover:text-gray-800 hover:bg-gray-100"
+              className="
+      absolute top-2 sm:top-4 right-2 sm:right-4 
+      p-1.5 sm:p-2 
+      rounded-full 
+      bg-white shadow 
+      text-gray-500 
+      hover:text-gray-800 hover:bg-gray-100
+    "
             >
-              <X size={20} />
+              <X size={18} className="sm:w-5 sm:h-5" />
             </button>
           </motion.div>
         </motion.div>

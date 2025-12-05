@@ -159,13 +159,28 @@ const Header = () => {
         {/* MIDDLE: Search Bar (medium only) */}
         {role === "user" && (
           <div className="hidden md:flex lg:hidden flex-1 justify-center px-4">
-            <div className="w-full max-w-md">
-              <input
-                type="text"
-                placeholder="Search events..."
-                className="w-full border border-gray-300 px-3 py-2 rounded-lg"
-              />
-            </div>
+            <Link
+              to="/search"
+              className="
+      w-full max-w-md 
+      flex items-center gap-2 
+      border border-gray-300 
+      px-3 py-2 
+      rounded-lg cursor-pointer
+    "
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-5 h-5 text-gray-500"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <circle cx="11" cy="11" r="6" strokeWidth={2} />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" strokeWidth={2} />
+              </svg>
+              <span className="text-gray-500 text-sm">Search events...</span>
+            </Link>
           </div>
         )}
 
@@ -276,11 +291,30 @@ const Header = () => {
         <div className="md:flex lg:hidden bg-white shadow-md p-4 flex flex-col gap-4 w-full">
           {/* Searchbar (small only) */}
           <div className="sm:block md:hidden">
-            <input
-              type="text"
-              placeholder="Search events..."
-              className="w-full border border-gray-300 px-3 py-2 rounded-lg"
-            />
+            <Link
+              to="/search"
+              onClick={() => setMobileMenuOpen(false)}
+              className="
+      w-full 
+      flex items-center gap-2 
+      border border-gray-300 
+      px-3 py-2 
+      rounded-lg 
+      cursor-pointer
+    "
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-5 h-5 text-gray-500"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <circle cx="11" cy="11" r="6" strokeWidth={2} />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" strokeWidth={2} />
+              </svg>
+              <span className="text-gray-500 text-sm">Search events...</span>
+            </Link>
           </div>
 
           {/* Tabs */}

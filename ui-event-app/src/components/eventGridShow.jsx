@@ -20,8 +20,8 @@ const EventGridShow = ({ title, events }) => {
     const updateItemsPerPage = () => {
       if (window.innerWidth >= 1536) setItemsPerPage(4); // 2xl
       else if (window.innerWidth >= 1280) setItemsPerPage(4); // xl
-      else if (window.innerWidth >= 1024) setItemsPerPage(3); // lg
-      else if (window.innerWidth >= 668) setItemsPerPage(2); // md
+      else if (window.innerWidth >= 800) setItemsPerPage(3); // lg
+      else if (window.innerWidth >= 480) setItemsPerPage(2); // md
       else setItemsPerPage(1); // sm
     };
 
@@ -33,8 +33,13 @@ const EventGridShow = ({ title, events }) => {
   return (
     <div className={` `}>
       {/* Header */}
-      <div className="flex items-center justify-between mb-8 px-8">
-        <h2 className="text-2xl font-bold text-gray-900 tracking-tight">
+      <div className="flex items-center justify-between mb-8 px-8 max-sm:mb-6 max-sm:px-6">
+        <h2
+          className="
+      text-xl md:text-2xl 
+      font-bold text-gray-900 tracking-tight
+    "
+        >
           {title}
         </h2>
       </div>
@@ -57,7 +62,8 @@ const EventGridShow = ({ title, events }) => {
         {/* Grid */}
         <div
           className="grid  justify-items-center  gap-6 px-6
-          grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4"
+          grid-cols-1 min-[480px]:grid-cols-2
+ min-[800px]:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4"
         >
           {currentItems.map((item, idx) => (
             <EventCard key={idx} item={item} />

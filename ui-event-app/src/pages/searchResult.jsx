@@ -172,11 +172,14 @@ const SearchPage = ({ defaultCategory }) => {
                     onChange={(e) => setInputValue(e.target.value)}
                     placeholder="Search events by name, description, category..."
                     className="
-            w-full pl-12 pr-16 py-3 rounded-xl
-            border border-gray-300 text-gray-800 placeholder-gray-400
-            shadow-sm hover:shadow transition-all
-            focus:outline-none focus:ring-2 focus:ring-pink-300/50
-          "
+    w-full pl-10 md:pl-12 pr-14 md:pr-16 
+    py-2.5 md:py-3 
+    rounded-lg md:rounded-xl
+    text-sm md:text-base
+    border border-gray-300 text-gray-800 placeholder-gray-400
+    shadow-sm hover:shadow transition-all
+    focus:outline-none focus:ring-2 focus:ring-pink-300/50
+  "
                   />
 
                   {/* Search Icon */}
@@ -188,11 +191,14 @@ const SearchPage = ({ defaultCategory }) => {
                       setSearch(inputValue);
                     }}
                     className="
-            absolute right-2 top-1/2 -translate-y-1/2
-            bg-gradient-to-r from-[#ff512f] to-[#dd2476]
-            text-white text-sm px-4 py-1.5 rounded-lg shadow-md
-            hover:opacity-90 transition
-          "
+    absolute right-2 top-1/2 -translate-y-1/2
+    text-white text-xs md:text-sm 
+    px-3 md:px-4 
+    py-1 md:py-1.5 
+    rounded-lg shadow-md
+    bg-gradient-to-r from-[#ff512f] to-[#dd2476]
+    hover:opacity-90 transition
+  "
                   >
                     Search
                   </button>
@@ -217,10 +223,13 @@ const SearchPage = ({ defaultCategory }) => {
                   <button
                     onClick={() => setOpen(!open)}
                     className="
-  flex items-center gap-1.5 px-3 py-1 rounded-lg border
-  border-gray-300 shadow-sm bg-white
-  hover:bg-gray-100 transition
-  text-xs font-medium
+                    flex items-center gap-1.5 
+                    px-2.5 md:px-3 
+                    py-1 
+                    rounded-md md:rounded-lg
+                    border border-gray-300 shadow-sm bg-white
+                    hover:bg-gray-100 transition
+                    text-[10px] md:text-xs font-medium
 "
                   >
                     {/* Gradient Icon */}
@@ -282,7 +291,10 @@ const SearchPage = ({ defaultCategory }) => {
                               dispatch(setFiltersApplied(true));
                             }}
                             className={`
-                  px-3 py-1 rounded-lg text-xs font-medium transition
+                              px-2.5 md:px-3 
+                              py-1 
+                              rounded-md md:rounded-lg
+                              text-[10px] md:text-xs font-medium transition
                   ${
                     active
                       ? "text-white shadow-md border-0"
@@ -315,7 +327,7 @@ const SearchPage = ({ defaultCategory }) => {
                 </div>
               )}
 
-              <div className="grid justify-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+              <div className="grid justify-items-center grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
                 {filteredEvents?.searchEvents?.data?.map((event) => (
                   <EventCard key={event._id} item={event} />
                 ))}
@@ -323,19 +335,22 @@ const SearchPage = ({ defaultCategory }) => {
             </div>
 
             {/* ⭐ PAGINATION */}
-            <div className="flex justify-center mt-12">
+            <div className="flex justify-center mt-10">
               <nav>
-                <ul className="inline-flex gap-1 text-sm">
+                <ul className="inline-flex gap-1 text-xs md:text-sm">
                   {/* Prev */}
                   <li>
                     <button
                       onClick={handlePrevPage}
                       disabled={page === 1}
                       className="
-              px-4 h-10 flex items-center justify-center rounded-lg
-              bg-white border border-gray-300 text-gray-600
-              hover:bg-gray-100 disabled:opacity-50
-            "
+            px-2.5 md:px-4 
+            h-8 md:h-10 
+            flex items-center justify-center 
+            rounded-md md:rounded-lg
+            bg-white border border-gray-300 text-gray-600
+            hover:bg-gray-100 disabled:opacity-50
+          "
                     >
                       Previous
                     </button>
@@ -361,8 +376,11 @@ const SearchPage = ({ defaultCategory }) => {
                           onClick={() => setPage(num)}
                           aria-current={num === page ? "page" : undefined}
                           className={`
-                  px-4 h-10 flex items-center justify-center rounded-lg border
-                  transition
+                  px-2.5 md:px-4 
+                  h-8 md:h-10 
+                  flex items-center justify-center 
+                  rounded-md md:rounded-lg
+                  border transition
                   ${
                     num === page
                       ? "bg-pink-50 text-pink-600 border-pink-300"
@@ -382,10 +400,13 @@ const SearchPage = ({ defaultCategory }) => {
                       onClick={handleNextPage}
                       disabled={page === totalPages}
                       className="
-              px-4 h-10 flex items-center justify-center rounded-lg
-              bg-white border border-gray-300 text-gray-600
-              hover:bg-gray-100 disabled:opacity-50
-            "
+            px-2.5 md:px-4 
+            h-8 md:h-10 
+            flex items-center justify-center 
+            rounded-md md:rounded-lg
+            bg-white border border-gray-300 text-gray-600
+            hover:bg-gray-100 disabled:opacity-50
+          "
                     >
                       Next
                     </button>

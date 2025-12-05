@@ -238,7 +238,10 @@ const BannerShow = () => {
                   <h2 className="text-base sm:text-lg font-bold text-gray-900 text-center">
                     {ev?.title}
                   </h2>
-                  <button className="px-4 sm:px-6 py-2 sm:py-3 bg-black text-white rounded-xl font-semibold text-sm sm:text-base hover:bg-gray-800 transition cursor-pointer">
+                  <button
+                    onClick={handleClick}
+                    className="px-4 sm:px-6 py-2 sm:py-3 bg-black text-white rounded-xl font-semibold text-sm sm:text-base hover:bg-gray-800 transition cursor-pointer"
+                  >
                     Book tickets
                   </button>
                 </div>

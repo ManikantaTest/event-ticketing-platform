@@ -180,114 +180,166 @@ export default function Component() {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
           {/* LEFT COLUMN */}
-          <div className="md:col-span-7 lg:col-span-8 space-y-8">
+          <div className="md:col-span-7 lg:col-span-8 space-y-6">
             {/* Banner */}
-            <div className="bg-white rounded-xl shadow-lg overflow-hidden h-[420px] relative">
+            <div
+              className="
+    bg-white rounded-xl shadow-lg overflow-hidden 
+    h-56 sm:h-72 md:h-[380px] lg:h-[420px] 
+    relative
+  "
+            >
               <div className="relative h-full overflow-hidden">
                 <img
                   src={selectedEvent?.bannerImage}
-                  alt="Tech Conference"
+                  alt={selectedEvent?.title}
                   className="w-full h-full object-cover"
                 />
 
-                <div className="absolute top-3 right-3 group">
+                {/* Bookmark Button */}
+                <div className="absolute top-2 sm:top-3 right-2 sm:right-3 group">
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
                       changeBookmarkStatus();
                     }}
-                    className="p-1.5 rounded-full bg-white/80 hover:bg-white text-gray-800 cursor-pointer shadow-sm"
+                    className="
+          p-1 sm:p-1.5 
+          rounded-full bg-white/80 hover:bg-white 
+          text-gray-800 cursor-pointer shadow-sm 
+        "
                   >
                     {bookmarked ? (
-                      <BookmarkCheck className="w-5 h-5 text-[#ff512f]" />
+                      <BookmarkCheck className="w-4 h-4 sm:w-5 sm:h-5 text-[#ff512f]" />
                     ) : (
-                      <Bookmark className="w-5 h-5" />
+                      <Bookmark className="w-4 h-4 sm:w-5 sm:h-5" />
                     )}
                   </button>
 
                   {/* Tooltip */}
                   <div
-                    className="absolute right-full top-1/2 -translate-y-1/2 mr-2 
-               px-2 py-1 rounded-md text-xs text-white whitespace-nowrap
-               bg-black/80 shadow-lg
-               opacity-0 group-hover:opacity-100 
-               pointer-events-none transition-opacity duration-200"
+                    className="
+          absolute right-full top-1/2 -translate-y-1/2 mr-2 
+          px-1.5 py-1 sm:px-2 sm:py-1 
+          rounded-md text-[10px] sm:text-xs 
+          text-white whitespace-nowrap
+          bg-black/80 shadow-lg
+          opacity-0 group-hover:opacity-100 
+          pointer-events-none transition-opacity duration-200
+        "
                   >
                     {bookmarked ? "Remove from interests" : "Save to interests"}
                   </div>
                 </div>
 
-                <div className="absolute bottom-3 left-3">
+                {/* Category Chip */}
+                <div className="absolute bottom-2 sm:bottom-3 left-2 sm:left-3">
                   <span
-                    className="bg-primary-500/90 backdrop-blur-sm text-white px-3 py-1 
-                   rounded-full text-sm font-medium shadow-lg"
+                    className="
+          bg-primary-500/90 backdrop-blur-sm 
+          text-white 
+          px-2 sm:px-3 
+          py-0.5 sm:py-1
+          rounded-full 
+          text-xs sm:text-sm 
+          font-medium 
+          shadow-lg
+        "
                   >
                     {selectedEvent?.category}
                   </span>
                 </div>
-
-                {/* Bottom-right Interested Users Count */}
               </div>
             </div>
 
             {/* Title + Description */}
-            <div className="bg-white rounded-2xl  px-3 pb-3 ">
-              <div className="flex justify-end items-center gap-2">
-                <span className="material-symbols-rounded text-sm text-green-500">
+            <div className="bg-white rounded-2xl px-3 sm:px-4 md:px-3 pb-3 sm:pb-4">
+              {/* Interested Count */}
+              <div className="flex justify-end items-center gap-1.5 sm:gap-2">
+                <span className="material-symbols-rounded text-xs sm:text-sm text-green-500">
                   thumb_up
                 </span>
-                <span className="text-black/90 text-sm font-medium">
+                <span className="text-black/90 text-xs sm:text-sm md:text-sm font-medium">
                   {selectedEvent?.interestedUsers} are interested
                 </span>
               </div>
-              {/* selectedEvent Title */}
-              <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-3 tracking-tight">
+
+              {/* Title */}
+              <h1
+                className="
+      text-2xl sm:text-3xl md:text-4xl 
+      font-extrabold text-gray-900 
+      mb-2 sm:mb-3 
+      tracking-tight
+    "
+              >
                 {selectedEvent?.title}
               </h1>
 
-              {/* selectedEvent Subtitle */}
-              <p className="text-lg text-gray-600 mb-6 italic">
+              {/* Subtitle */}
+              <p className="text-sm sm:text-base md:text-lg text-gray-600 mb-4 sm:mb-6 italic">
                 Join us for an exciting day of this event
               </p>
 
-              {/* Gradient Divider */}
+              {/* Divider */}
               <div
-                className="w-24 h-1 rounded-full mb-6"
+                className="w-20 sm:w-24 h-1 rounded-full mb-4 sm:mb-6"
                 style={{
                   background: "linear-gradient(90deg, #ff512f, #dd2476)",
                 }}
               ></div>
 
-              {/* selectedEvent Description Header */}
-              <h2 className="text-2xl font-bold mb-4 text-gray-800 relative ">
+              {/* Description Header */}
+              <h2
+                className="
+      text-xl sm:text-2xl font-bold 
+      mb-3 sm:mb-4 
+      text-gray-800 
+      relative
+    "
+              >
                 Event Description
               </h2>
 
-              {/* Event Description Text */}
-              <p className="text-gray-700 leading-relaxed text-justify">
+              {/* Description Text */}
+              <p className="text-gray-700 leading-relaxed text-justify text-sm sm:text-base">
                 {selectedEvent?.description}
               </p>
             </div>
 
             {/* Organizer */}
-            <div className="bg-white rounded-2xl shadow-md p-6 relative">
-              {/* View Profile - Top Right */}
+            <div className="bg-white rounded-2xl shadow-md p-6 relative max-sm:p-4">
+              {/* View Profile Button */}
               <button
                 onClick={handleOrganizer}
-                className="absolute top-6 right-6 flex items-center gap-1 px-3 py-1.5 rounded-full text-sm font-medium text-primary-600 hover:text-white hover:bg-gradient-to-r hover:from-[#ff512f] hover:to-[#dd2476] transition-all shadow-sm cursor-pointer"
+                className="
+      absolute 
+      top-6 right-6 
+      flex items-center gap-1 
+      px-3 py-1.5 
+      rounded-full 
+      text-sm font-medium 
+      text-primary-600 
+      hover:text-white hover:bg-gradient-to-r hover:from-[#ff512f] hover:to-[#dd2476]
+      transition-all shadow-sm cursor-pointer
+      max-sm:text-xs max-sm:px-2.5 max-sm:py-1
+    "
               >
-                <span className="material-symbols-outlined text-base">
+                <span className="material-symbols-outlined text-base max-sm:text-sm">
                   person
                 </span>
                 View Profile
               </button>
 
-              <h2 className="text-2xl font-bold mb-4 text-gray-800">
+              {/* Section Title */}
+              <h2 className="text-2xl font-bold mb-4 text-gray-800 max-sm:text-xl max-sm:mb-3">
                 Organizer
               </h2>
 
-              <div className="flex  gap-4">
-                <div className="w-10 h-10 min-w-10 bg-gray-200 rounded-full overflow-hidden">
+              {/* Organizer Block */}
+              <div className="flex gap-4 max-sm:gap-3">
+                {/* Avatar */}
+                <div className="w-10 h-10 min-w-10 rounded-full overflow-hidden bg-gray-200 max-sm:w-9 max-sm:h-9">
                   <img
                     src={
                       "https://ui-avatars.com/api/?background=random&name=" +
@@ -302,18 +354,22 @@ export default function Component() {
                     className="w-full h-full object-cover"
                   />
                 </div>
+
+                {/* Details */}
                 <div>
-                  <h3 className="text-xl font-semibold text-gray-800">
+                  <h3 className="text-xl font-semibold text-gray-800 max-sm:text-lg">
                     {organizer?.orgName}
                   </h3>
-                  <p className="text-gray-600 mb-2">
+
+                  <p className="text-gray-600 mt-2 mb-2 max-sm:text-sm max-sm:mb-2">
                     {organizer?.orgDescription}
                   </p>
 
-                  <div className="flex pt-2 items-center gap-4">
-                    {/* Contact */}
+                  {/* Contact Buttons */}
+                  <div className="flex pt-2 items-center gap-4 max-sm:gap-3 max-sm:pt-1">
+                    {/* Email */}
                     <button
-                      className="flex items-center gap-1 hover:opacity-90 cursor-pointer"
+                      className="flex items-center gap-1 cursor-pointer hover:opacity-90"
                       onClick={() => {
                         copyToClipboard(organizer?.orgEmail);
                         setCopied("Email copied!");
@@ -321,7 +377,7 @@ export default function Component() {
                       }}
                     >
                       <span
-                        className="material-symbols-outlined text-sm "
+                        className="material-symbols-outlined text-sm max-sm:text-xs"
                         style={{
                           background:
                             "linear-gradient(90deg, #ff512f, #dd2476)",
@@ -331,14 +387,14 @@ export default function Component() {
                       >
                         mail
                       </span>
-                      <span className="text-sm text-primary-600 hover:text-primary-800">
+                      <span className="text-sm text-primary-600 hover:text-primary-800 max-sm:text-xs">
                         Contact
                       </span>
                     </button>
 
                     {/* Phone */}
                     <button
-                      className="text-primary-600 hover:text-primary-800 flex items-center gap-1 cursor-pointer"
+                      className="flex items-center gap-1 cursor-pointer text-primary-600 hover:text-primary-800"
                       onClick={() => {
                         copyToClipboard(organizer?.phone);
                         setCopied("Phone number copied!");
@@ -346,7 +402,7 @@ export default function Component() {
                       }}
                     >
                       <span
-                        className="material-symbols-outlined text-sm"
+                        className="material-symbols-outlined text-sm max-sm:text-xs"
                         style={{
                           background:
                             "linear-gradient(90deg, #ff512f, #dd2476)",
@@ -356,7 +412,7 @@ export default function Component() {
                       >
                         call
                       </span>
-                      <span className="text-sm">Phone</span>
+                      <span className="text-sm max-sm:text-xs">Phone</span>
                     </button>
                   </div>
                 </div>
@@ -364,15 +420,19 @@ export default function Component() {
             </div>
 
             {/* Reviews */}
-            <div className="bg-white rounded-2xl shadow-md p-6">
-              <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-bold text-gray-800">Reviews</h2>
-                <div className="flex items-center gap-2">
+            <div className="bg-white rounded-2xl shadow-md p-6 max-sm:p-4">
+              {/* Header */}
+              <div className="flex justify-between items-center mb-6 max-sm:mb-4">
+                <h2 className="text-2xl max-sm:text-xl font-bold text-gray-800">
+                  Reviews
+                </h2>
+
+                <div className="flex items-center gap-2 max-sm:gap-1.5">
                   <div className="flex">
                     {[1, 2, 3, 4, 5].map((star) => (
                       <span
                         key={star}
-                        className={`material-symbols-outlined ${
+                        className={`material-symbols-outlined text-xl max-sm:text-lg ${
                           star <= Math.round(selectedEvent?.averageRating)
                             ? "text-amber-400"
                             : "text-gray-300"
@@ -382,32 +442,36 @@ export default function Component() {
                       </span>
                     ))}
                   </div>
-                  <span className="text-gray-600 font-medium">
+
+                  <span className="text-gray-600 font-medium text-sm max-sm:text-xs">
                     {selectedEvent?.averageRating} (
                     {selectedEvent?.ratings?.length} reviews)
                   </span>
                 </div>
               </div>
+
+              {/* No Reviews */}
               {selectedEvent?.ratings?.length === 0 ? (
                 <NoData title="No reviews found" />
               ) : (
-                <div className="space-y-4">
+                <div className="space-y-4 max-sm:space-y-3">
                   {selectedEvent?.ratings?.slice(0, 3).map((review, idx) => {
                     const user = review.user;
+
                     return (
                       <div
                         key={review._id}
                         className={`${
                           idx !==
                           Math.min(3, selectedEvent?.ratings?.length) - 1
-                            ? "border-b border-gray-200 pb-6"
+                            ? "border-b border-gray-200 pb-6 max-sm:pb-4"
                             : "pb-2"
                         }`}
                       >
-                        <div className="flex justify-between mb-2">
+                        <div className="flex justify-between mb-2 max-sm:mb-1">
                           {/* User Info */}
-                          <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 bg-gray-200 rounded-full overflow-hidden">
+                          <div className="flex items-center gap-3 max-sm:gap-2">
+                            <div className="w-10 h-10 max-sm:w-8 max-sm:h-8 bg-gray-200 rounded-full overflow-hidden">
                               <img
                                 src={user.userProfileImage}
                                 onError={(e) => {
@@ -419,11 +483,12 @@ export default function Component() {
                                 className="w-full h-full object-cover"
                               />
                             </div>
+
                             <div>
-                              <p className="font-medium text-gray-800">
+                              <p className="font-medium text-gray-800 text-sm max-sm:text-[13px]">
                                 {user.username}
                               </p>
-                              <p className="text-sm text-gray-500">
+                              <p className="text-sm max-sm:text-xs text-gray-500">
                                 {new Date(review.createdAt).toLocaleDateString(
                                   "en-US",
                                   {
@@ -436,12 +501,12 @@ export default function Component() {
                             </div>
                           </div>
 
-                          {/* Rating */}
+                          {/* Rating Stars */}
                           <div className="flex">
                             {[1, 2, 3, 4, 5].map((star) => (
                               <span
                                 key={star}
-                                className={`material-symbols-outlined ${
+                                className={`material-symbols-outlined text-lg max-sm:text-base ${
                                   star <= review.rating
                                     ? "text-amber-400"
                                     : "text-gray-300"
@@ -454,7 +519,9 @@ export default function Component() {
                         </div>
 
                         {/* Review Text */}
-                        <p className="text-gray-700">{review?.review}</p>
+                        <p className="text-gray-700 text-sm max-sm:text-[13px] leading-relaxed">
+                          {review?.review}
+                        </p>
                       </div>
                     );
                   })}
@@ -463,21 +530,29 @@ export default function Component() {
                   {selectedEvent?.ratings?.length > 3 && (
                     <button
                       onClick={() => setShowAll(true)}
-                      className="w-full border border-gray-300 text-gray-700 hover:bg-gray-50 font-medium py-2 px-4 rounded-lg transition-colors duration-300 flex items-center justify-center gap-2 mt-4 cursor-pointer"
+                      className="
+          w-full border border-gray-300 text-gray-700 
+          hover:bg-gray-50 font-medium 
+          py-2 px-4 rounded-lg transition 
+          flex items-center justify-center gap-2
+          max-sm:text-sm max-sm:py-1.5 max-sm:px-3 cursor-pointer
+        "
                     >
-                      <span className="material-symbols-outlined">forum</span>
+                      <span className="material-symbols-outlined text-base max-sm:text-sm">
+                        forum
+                      </span>
                       View All Reviews
                     </button>
                   )}
 
-                  {/* Modal for All Reviews */}
+                  {/* Full Reviews Modal */}
                   <AnimatePresence>
                     {showAll && (
                       <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[2000]"
+                        className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[2000] p-3"
                         onClick={() => setShowAll(false)}
                       >
                         <motion.div
@@ -485,11 +560,16 @@ export default function Component() {
                           animate={{ y: 0, opacity: 1 }}
                           exit={{ y: 40, opacity: 0 }}
                           onClick={(e) => e.stopPropagation()}
-                          className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[80vh] p-6 md:p-8 overflow-hidden"
+                          className="
+              bg-white rounded-2xl shadow-2xl 
+              w-full max-w-3xl max-h-[80vh] 
+              p-6 md:p-8 overflow-hidden
+              max-sm:p-4
+            "
                         >
-                          {/* Header */}
-                          <div className="flex justify-between items-center mb-6">
-                            <h2 className="text-2xl font-bold text-gray-900">
+                          {/* Modal Header */}
+                          <div className="flex justify-between items-center mb-6 max-sm:mb-4">
+                            <h2 className="text-2xl max-sm:text-xl font-bold text-gray-900">
                               All Reviews
                             </h2>
                             <button
@@ -503,7 +583,7 @@ export default function Component() {
                           </div>
 
                           {/* Filter */}
-                          <div className="flex items-center gap-2 mb-6">
+                          <div className="flex items-center gap-2 mb-6 max-sm:mb-4">
                             {[1, 2, 3, 4, 5].map((star) => (
                               <button
                                 key={star}
@@ -512,12 +592,15 @@ export default function Component() {
                                     filterRating === star ? null : star
                                   )
                                 }
-                                className={`px-4 py-1.5 rounded-full border text-sm font-medium transition shadow-sm
-          ${
-            filterRating === star
-              ? "bg-amber-400 border-amber-400 text-white"
-              : "border-gray-300 text-gray-700 hover:bg-gray-100"
-          }`}
+                                className={`
+                    px-4 py-1.5 rounded-full border text-sm font-medium shadow-sm
+                    max-sm:px-3 max-sm:py-1 max-sm:text-xs cursor-pointer
+                    ${
+                      filterRating === star
+                        ? "bg-amber-400 border-amber-400 text-white"
+                        : "border-gray-300 text-gray-700 hover:bg-gray-100"
+                    }
+                  `}
                               >
                                 {star} ★
                               </button>
@@ -525,24 +608,24 @@ export default function Component() {
                           </div>
 
                           {/* Reviews List */}
-                          <div className="space-y-6 max-h-[62vh] pr-4 overflow-y-auto custom-scrollbar">
+                          <div className="space-y-6 max-sm:space-y-4 max-h-[62vh] pr-4 overflow-y-auto custom-scrollbar">
                             {filteredReviews?.length === 0 ? (
-                              <p className="text-gray-500 text-center py-10">
+                              <p className="text-gray-500 text-center py-10 max-sm:text-sm">
                                 No reviews found.
                               </p>
                             ) : (
-                              filteredReviews?.map((review, idx) => {
+                              filteredReviews?.map((review) => {
                                 const user = review.user;
 
                                 return (
                                   <div
                                     key={review._id}
-                                    className="pb-6 border-b last:border-b-0 last:pb-12 border-gray-200"
+                                    className="pb-6 max-sm:pb-4 border-b last:border-b-0 border-gray-200"
                                   >
-                                    <div className="flex justify-between items-start mb-2">
+                                    <div className="flex justify-between items-start mb-2 max-sm:mb-1">
                                       {/* User */}
-                                      <div className="flex items-center gap-3">
-                                        <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-200 shadow-inner">
+                                      <div className="flex items-center gap-3 max-sm:gap-2">
+                                        <div className="w-10 h-10 max-sm:w-8 max-sm:h-8 rounded-full overflow-hidden bg-gray-200 shadow-inner">
                                           <img
                                             src={user.userProfileImage}
                                             onError={(e) => {
@@ -556,10 +639,10 @@ export default function Component() {
                                         </div>
 
                                         <div>
-                                          <p className="font-semibold text-gray-900">
+                                          <p className="font-semibold text-gray-900 text-sm max-sm:text-[13px]">
                                             {user.username}
                                           </p>
-                                          <p className="text-sm text-gray-500">
+                                          <p className="text-sm max-sm:text-xs text-gray-500">
                                             {new Date(
                                               review.createdAt
                                             ).toLocaleDateString("en-US", {
@@ -576,7 +659,7 @@ export default function Component() {
                                         {[1, 2, 3, 4, 5].map((star) => (
                                           <span
                                             key={star}
-                                            className={`material-symbols-outlined text-lg ${
+                                            className={`material-symbols-outlined text-lg max-sm:text-base ${
                                               star <= review.rating
                                                 ? "text-amber-400"
                                                 : "text-gray-300"
@@ -589,7 +672,7 @@ export default function Component() {
                                     </div>
 
                                     {/* Review Text */}
-                                    <p className="text-gray-700 leading-relaxed">
+                                    <p className="text-gray-700 text-sm max-sm:text-[13px] leading-relaxed">
                                       {review?.review}
                                     </p>
                                   </div>
@@ -604,58 +687,46 @@ export default function Component() {
                 </div>
               )}
 
-              {/* Write Review Button — only show when review input is NOT open */}
+              {/* Write Review Button */}
               {!showReviewInput && (
                 <button
                   onClick={() => setShowReviewInput(true)}
-                  disabled={!eventBooked} // disabled if user hasn't booked
-                  className={`
-      relative group w-full mt-2
-      bg-gradient-to-r from-[#ff512f] to-[#dd2476]
-      text-white font-semibold py-2 px-4 rounded-lg shadow
-      transition-all duration-300 flex items-center justify-center gap-2
-      ${
-        eventBooked
-          ? "hover:opacity-90 cursor-pointer"
-          : "opacity-60 cursor-not-allowed"
-      }
-    `}
+                  disabled={!eventBooked}
+                  className="
+      relative group w-full mt-3 
+      bg-gradient-to-r from-[#ff512f] to-[#dd2476] 
+      text-white font-semibold 
+      py-2 px-4 rounded-lg shadow 
+      transition flex items-center justify-center gap-2
+      max-sm:py-1.5 max-sm:text-sm
+      disabled:opacity-60 cursor-pointer disabled:cursor-not-allowed
+    "
                 >
-                  <span className="material-symbols-outlined text-base">
+                  <span className="material-symbols-outlined text-base max-sm:text-sm">
                     edit
                   </span>
                   Write a Review
-                  {/* Tooltip (only when DISABLED) */}
                   {!eventBooked && (
-                    <div
-                      className="
-          absolute left-1/2 -translate-x-1/2 -bottom-9
-          px-2 py-1 rounded-md text-xs text-white whitespace-nowrap
-          bg-black/80 shadow-lg
-          opacity-0 group-hover:opacity-100
-          transition-opacity duration-200 pointer-events-none
-        "
-                    >
-                      You can write a review after attending the event
+                    <div className=" absolute left-1/2 -translate-x-1/2 -bottom-9 px-2 py-1 rounded-md text-xs text-white whitespace-nowrap bg-black/80 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none ">
+                      {" "}
+                      You can write a review after attending the event{" "}
                     </div>
                   )}
                 </button>
               )}
-
-              {/* Review Input Form */}
               {showReviewInput && (
-                <div className="mt-4 p-4 border border-gray-300 rounded-lg bg-gray-50 space-y-3">
+                <div className="mt-4 p-4 max-sm:p-3 border border-gray-300 rounded-lg bg-gray-50 space-y-3">
                   {/* Rating Stars */}
                   <div className="flex gap-1">
                     {[1, 2, 3, 4, 5].map((star) => (
                       <span
                         key={star}
                         onClick={() => setUserRating(star)}
-                        className={`material-symbols-outlined text-3xl cursor-pointer ${
+                        className={`material-symbols-outlined cursor-pointer ${
                           star <= userRating
                             ? "text-amber-400"
                             : "text-gray-300"
-                        }`}
+                        } text-3xl max-sm:text-2xl`}
                       >
                         star
                       </span>
@@ -664,25 +735,41 @@ export default function Component() {
 
                   {/* Textarea */}
                   <textarea
-                    className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-[#ff512f] outline-none text-gray-700"
-                    rows="4"
+                    className="
+        w-full border border-gray-300 rounded-lg 
+        p-3 max-sm:p-2.5 
+        focus:ring-2 focus:ring-[#ff512f] outline-none 
+        text-gray-700 text-sm max-sm:text-[13px]
+      "
+                    rows={4}
                     placeholder="Share your experience..."
                     value={userReview}
                     onChange={(e) => setUserReview(e.target.value)}
                   />
 
                   {/* Submit + Cancel */}
-                  <div className="flex justify-end gap-3">
+                  <div className="flex justify-end gap-3 max-sm:gap-2">
                     <button
                       onClick={() => setShowReviewInput(false)}
-                      className="px-4 py-2 border border-gray-400 rounded-lg text-gray-600 hover:bg-gray-200 cursor-pointer"
+                      className="
+          px-4 py-2 max-sm:px-3 max-sm:py-1.5 
+          border border-gray-400 rounded-lg 
+          text-gray-600 text-sm max-sm:text-xs 
+          hover:bg-gray-200 cursor-pointer
+        "
                     >
                       Cancel
                     </button>
 
                     <button
                       onClick={handleSubmitReview}
-                      className="px-5 py-2 bg-gradient-to-r from-[#ff512f] to-[#dd2476] text-white rounded-lg shadow font-medium hover:opacity-90 cursor-pointer"
+                      className="
+          px-5 py-2 max-sm:px-4 max-sm:py-1.5 
+          bg-gradient-to-r from-[#ff512f] to-[#dd2476] 
+          text-white rounded-lg shadow 
+          font-medium text-sm max-sm:text-xs 
+          hover:opacity-90 cursor-pointer
+        "
                     >
                       Submit Review
                     </button>
@@ -694,19 +781,19 @@ export default function Component() {
 
           {/* RIGHT COLUMN: selectedEvent Details + Tickets */}
           <div className="md:col-span-5 lg:col-span-4">
-            <div className="bg-white rounded-xl shadow-md p-6 sticky top-24">
+            <div className="bg-white rounded-xl shadow-md p-6 sticky top-24 max-sm:p-4">
               <div className="flex justify-between items-start mb-5">
-                <h3 className="text-xl font-bold text-gray-800">
+                <h3 className="text-xl font-bold text-gray-800 max-sm:text-lg">
                   Event Details
                 </h3>
-                <span className="bg-primary-100 uppercase text-primary-500 px-2 py-1 border border-gray-200 rounded-md text-xs font-medium">
+                <span className="bg-primary-100 uppercase text-primary-500 px-2 py-1 border border-gray-200 rounded-md text-xs font-medium max-sm:text-[10px]">
                   {selectedEvent?.status}
                 </span>
               </div>
-              <div className="space-y-4 mb-6">
+              <div className="space-y-4 mb-6 max-sm:space-y-3">
                 <div className="flex items-center gap-3">
                   <span
-                    className="material-symbols-outlined p-2 rounded-full bg-primary-50"
+                    className="material-symbols-outlined p-2 rounded-full bg-primary-50 max-sm:p-1 max-sm:text-xl"
                     style={{
                       background: "linear-gradient(90deg, #ff512f, #dd2476)",
                       WebkitBackgroundClip: "text",
@@ -716,15 +803,15 @@ export default function Component() {
                     calendar_month
                   </span>
                   <div>
-                    <p className="text-sm text-gray-500">Date</p>
-                    <p className="text-gray-700 font-medium">
+                    <p className="text-sm text-gray-500 max-sm:text-sm">Date</p>
+                    <p className="text-gray-700 font-medium max-sm:text-sm">
                       {formatEventDateShort()}
                     </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
                   <span
-                    className="material-symbols-outlined p-2 rounded-full bg-primary-50"
+                    className="material-symbols-outlined p-2 rounded-full bg-primary-50 max-sm:p-1 max-sm:text-xl"
                     style={{
                       background: "linear-gradient(90deg, #ff512f, #dd2476)",
                       WebkitBackgroundClip: "text",
@@ -734,8 +821,8 @@ export default function Component() {
                     schedule
                   </span>
                   <div>
-                    <p className="text-sm text-gray-500">Time</p>
-                    <p className="text-gray-700 font-medium">
+                    <p className="text-sm text-gray-500 max-sm:text-sm">Time</p>
+                    <p className="text-gray-700 font-medium max-sm:text-sm">
                       {formatTime(selectedEvent?.startTime)} -{" "}
                       {formatTime(selectedEvent?.endTime)}
                     </p>
@@ -743,7 +830,7 @@ export default function Component() {
                 </div>
                 <div className="flex items-center gap-3">
                   <span
-                    className="material-symbols-outlined p-2 rounded-full bg-primary-50"
+                    className="material-symbols-outlined p-2 rounded-full bg-primary-50 max-sm:p-1 max-sm:text-xl"
                     style={{
                       background: "linear-gradient(90deg, #ff512f, #dd2476)",
                       WebkitBackgroundClip: "text",
@@ -753,9 +840,11 @@ export default function Component() {
                     location_on
                   </span>
                   <div>
-                    <p className="text-sm text-gray-500">Location</p>
+                    <p className="text-sm text-gray-500 max-sm:text-sm">
+                      Location
+                    </p>
                     <div className="flex items-center gap-1.5">
-                      <p className="text-gray-700 font-medium">
+                      <p className="text-gray-700 font-medium max-sm:text-sm">
                         {selectedEvent?.location.label}
                       </p>
 
@@ -769,10 +858,9 @@ export default function Component() {
                               )
                             }
                             className="flex items-center justify-center cursor-pointer"
-                            // title="View on Google Maps"
                           >
                             <span
-                              className="material-symbols-outlined text-base"
+                              className="material-symbols-outlined text-base max-sm:text-xl"
                               style={{
                                 background:
                                   "linear-gradient(90deg, #ff512f, #dd2476)",
@@ -798,7 +886,7 @@ export default function Component() {
                 </div>
                 <div className="flex items-center gap-3">
                   <span
-                    className="material-symbols-outlined p-2 rounded-full bg-primary-50"
+                    className="material-symbols-outlined p-2 rounded-full bg-primary-50 max-sm:p-1 max-sm:text-xl"
                     style={{
                       background: "linear-gradient(90deg, #ff512f, #dd2476)",
                       WebkitBackgroundClip: "text",
@@ -808,19 +896,23 @@ export default function Component() {
                     translate
                   </span>
                   <div>
-                    <p className="text-sm text-gray-500">Languages</p>
+                    <p className="text-sm text-gray-500 max-sm:text-sm">
+                      Languages
+                    </p>
                     {selectedEvent?.languages ? (
                       <p className="text-gray-700 font-medium">
                         {selectedEvent?.languages.join(", ")}
                       </p>
                     ) : (
-                      <p className="text-gray-700 font-medium">Not provided</p>
+                      <p className="text-gray-700 font-medium max-sm:text-sm">
+                        Not provided
+                      </p>
                     )}
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
                   <span
-                    className="material-symbols-outlined p-2 rounded-full bg-primary-50"
+                    className="material-symbols-outlined p-2 rounded-full bg-primary-50 max-sm:p-1 max-sm:text-xl"
                     style={{
                       background: "linear-gradient(90deg, #ff512f, #dd2476)",
                       WebkitBackgroundClip: "text",
@@ -830,8 +922,10 @@ export default function Component() {
                     category
                   </span>
                   <div>
-                    <p className="text-sm text-gray-500">Category</p>
-                    <p className="text-gray-700 font-medium">
+                    <p className="text-sm text-gray-500 max-sm:text-sm">
+                      Category
+                    </p>
+                    <p className="text-gray-700 font-medium max-sm:text-sm">
                       {selectedEvent?.category}
                     </p>
                   </div>
@@ -841,7 +935,7 @@ export default function Component() {
               <div className="border-t border-gray-200 pt-5">
                 <div className="mb-4">
                   <div className="flex items-baseline">
-                    <span className="text-3xl font-bold text-primary-600">
+                    <span className="text-3xl font-bold text-primary-600 max-sm:text-2xl">
                       ₹{selectedEvent?.startingPrice}
                     </span>
                     <span className="text-gray-600 ml-2 text-sm">onwards</span>
@@ -857,7 +951,7 @@ export default function Component() {
                           navigate("/event/" + selectedEvent._id + "/sessions")
                       : undefined
                   }
-                  className={`w-full font-bold py-3 px-4 rounded-lg shadow flex items-center justify-center gap-2 mb-2 transition-all duration-300
+                  className={`w-full font-bold py-3 max-sm:py-2 max-sm:text-sm px-4 rounded-lg shadow flex items-center justify-center gap-2 mb-2 transition-all duration-300
     ${
       selectedEvent?.status === "completed" || !sessionAvailable
         ? "bg-gray-400 cursor-not-allowed text-gray-200"

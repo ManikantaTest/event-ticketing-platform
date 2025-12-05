@@ -244,27 +244,42 @@ export default function MainLocationSelector({ isOpen, onClose, onSelect }) {
             transition={{ type: "spring", stiffness: 260, damping: 22 }}
             onClick={(e) => e.stopPropagation()}
             className="
-          w-full max-w-2xl 
-          bg-white rounded-3xl shadow-2xl 
-          h-[83vh] overflow-hidden flex flex-col
-        "
+    w-full max-w-2xl 
+    bg-white rounded-3xl shadow-2xl 
+    h-[83vh] overflow-hidden flex flex-col
+  "
           >
             {/* Header */}
-            <div className="p-6 border-b border-gray-200">
-              <h2 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
-                <span className="material-symbols-outlined text-pink-500">
+            <div className="p-4 md:p-6 border-b border-gray-200 relative">
+              <h2 className="text-lg md:text-xl font-semibold text-gray-900 flex items-center gap-2">
+                <span className="material-symbols-outlined text-pink-500 text-xl md:text-2xl">
                   location_on
                 </span>
                 Select Location
               </h2>
+
+              {/* Close Button */}
+              <button
+                onClick={onClose}
+                className="
+      absolute right-3 md:right-5 
+      top-3 md:top-5 
+      text-gray-500 hover:text-gray-700 
+      transition cursor-pointer
+    "
+              >
+                <span className="material-symbols-outlined text-2xl md:text-3xl">
+                  close
+                </span>
+              </button>
             </div>
 
             {/* Body */}
-            <div className="p-6 flex-1 overflow-y-auto">
+            <div className="p-4 md:p-6 flex-1 overflow-y-auto">
               {/* Search input */}
-              <div className="mb-5">
+              <div className="mb-4 md:mb-5">
                 <div className="relative">
-                  <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                  <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-base md:text-lg">
                     search
                   </span>
                   <input
@@ -277,11 +292,13 @@ export default function MainLocationSelector({ isOpen, onClose, onSelect }) {
                     placeholder="Search city or area"
                     autoFocus
                     className="
-    w-full border border-gray-300 rounded-xl 
-    py-3 pl-11 pr-4 text-gray-800
-    focus:outline-none focus:ring-0 focus:border-gray-300
-    transition-all placeholder-gray-400
-  "
+            w-full border border-gray-300 rounded-lg md:rounded-xl 
+            py-2.5 md:py-3 
+            pl-10 md:pl-11 pr-3 md:pr-4 
+            text-sm md:text-base text-gray-800
+            focus:outline-none focus:ring-0 focus:border-gray-300
+            transition-all placeholder-gray-400
+          "
                   />
                 </div>
               </div>
@@ -290,7 +307,9 @@ export default function MainLocationSelector({ isOpen, onClose, onSelect }) {
               {input.length > 0 ? (
                 <>
                   {loading ? (
-                    <p className="text-gray-500 text-sm mt-4">Loading…</p>
+                    <p className="text-gray-500 text-xs md:text-sm mt-3 md:mt-4">
+                      Loading…
+                    </p>
                   ) : options.length > 0 ? (
                     <ul className="space-y-1">
                       {options.slice(0, 8).map((opt, idx) => (
@@ -298,20 +317,24 @@ export default function MainLocationSelector({ isOpen, onClose, onSelect }) {
                           key={idx}
                           onClick={() => handleSelect(opt)}
                           className="
-                        flex items-center gap-3 
-                        px-4 py-3 cursor-pointer rounded-xl
-                        hover:bg-pink-50 transition-all
-                      "
+                  flex items-center gap-3 
+                  px-3 md:px-4 
+                  py-2.5 md:py-3 
+                  cursor-pointer rounded-lg md:rounded-xl
+                  hover:bg-pink-50 transition-all
+                "
                         >
-                          <span className="material-symbols-outlined text-pink-600">
+                          <span className="material-symbols-outlined text-pink-600 text-xl md:text-2xl">
                             location_on
                           </span>
-                          <span className="text-gray-800">{opt.label}</span>
+                          <span className="text-gray-800 text-sm md:text-base">
+                            {opt.label}
+                          </span>
                         </li>
                       ))}
                     </ul>
                   ) : (
-                    <p className="text-gray-500 text-sm mt-4">
+                    <p className="text-gray-500 text-xs md:text-sm mt-3 md:mt-4">
                       No results found
                     </p>
                   )}
@@ -323,12 +346,13 @@ export default function MainLocationSelector({ isOpen, onClose, onSelect }) {
                     type="button"
                     onClick={handleUseCurrentLocation}
                     className="
-                  flex items-center gap-2 
-                  text-pink-600 font-medium mb-6
-                  hover:underline underline-offset-2
-                "
+            flex items-center gap-2 
+            text-pink-600 font-medium mb-5 md:mb-6
+            text-sm md:text-base
+            hover:underline underline-offset-2
+          "
                   >
-                    <span className="material-symbols-outlined text-pink-500">
+                    <span className="material-symbols-outlined text-pink-500 text-xl md:text-2xl">
                       my_location
                     </span>
                     Use Current Location
@@ -336,25 +360,29 @@ export default function MainLocationSelector({ isOpen, onClose, onSelect }) {
 
                   {/* Popular Cities */}
                   <div>
-                    <h3 className="text-base font-semibold text-gray-700 mb-3">
+                    <h3 className="text-sm md:text-base font-semibold text-gray-700 mb-2 md:mb-3">
                       Popular Cities
                     </h3>
 
-                    <div className="grid grid-cols-3 sm:grid-cols-4 gap-4">
+                    <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 md:gap-4">
                       {cities.map((city) => (
                         <button
                           key={city.name}
                           onClick={() => handleSelect(city)}
                           type="button"
                           className="
-                        bg-white border border-gray-200 
-                        rounded-xl p-4 flex flex-col items-center
-                        hover:border-pink-300 hover:bg-pink-50 
-                        transition-all shadow-sm hover:shadow-md
-                      "
+                  bg-white border border-gray-200 
+                  rounded-lg md:rounded-xl 
+                  p-3 md:p-4 
+                  flex flex-col items-center
+                  hover:border-pink-300 hover:bg-pink-50 
+                  transition-all shadow-sm hover:shadow-md
+                "
                         >
-                          <span className="text-3xl">{city.icon}</span>
-                          <span className="text-sm font-medium text-gray-700 mt-2">
+                          <span className="text-2xl md:text-3xl">
+                            {city.icon}
+                          </span>
+                          <span className="text-xs md:text-sm font-medium text-gray-700 mt-1 md:mt-2">
                             {city.name}
                           </span>
                         </button>

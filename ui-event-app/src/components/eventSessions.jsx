@@ -172,24 +172,21 @@ export default function EventSessions() {
             className="bg-white backdrop-blur rounded-2xl shadow-md  p-6 relative"
             // style={{ border: "1.5px solid #e7e8ea" }}
           >
-            <h2
-              className="text-2xl font-bold mb-6"
-              style={{ color: "#0c172f" }}
-            >
+            <h2 className="text-2xl font-bold" style={{ color: "#0c172f" }}>
               🎬 Select Session
             </h2>
 
             {/* Legend at top-right */}
-            <div className="absolute top-9 right-10 flex gap-2 text-xs items-center">
-              <span className="w-3 h-3 bg-green-500 rounded-full"></span>{" "}
+            <div className="absolute top-9 right-10 flex flex-wrap gap-2 text-xs items-center max-sm:static max-sm:mt-2 max-sm:ml-2 max-sm:flex-wrap max-sm:gap-1">
+              <span className="w-3 h-3 max-sm:w-2.5 max-sm:h-2.5 bg-green-500 rounded-full"></span>{" "}
               Available
-              <span className="w-3 h-3 bg-yellow-400 rounded-full ml-2"></span>{" "}
+              <span className="w-3 h-3 max-sm:w-2.5 max-sm:h-2.5 bg-yellow-400 rounded-full max-sm:ml-1 ml-2"></span>{" "}
               Fast Filling
-              <span className="w-3 h-3 bg-red-500 rounded-full ml-2"></span>{" "}
+              <span className="w-3 h-3 max-sm:w-2.5 max-sm:h-2.5 bg-red-500 rounded-full max-sm:ml-1 ml-2"></span>{" "}
               Sold Out
             </div>
 
-            <div className="flex items-center gap-2 px-2">
+            <div className="flex items-center gap-2 px-2 mt-6">
               {/* Left arrow */}
               {canScrollLeft && (
                 <button
@@ -221,7 +218,7 @@ export default function EventSessions() {
                       className="flex flex-col items-center flex-shrink-0"
                     >
                       <button
-                        className={`px-5 py-2 rounded-full text-sm font-medium transition shadow cursor-pointer
+                        className={`px-5 py-2 rounded-full text-sm font-medium max-sm:px-3 max-sm:py-1 max-sm:text-xs transition shadow cursor-pointer
                   ${
                     session?._id === s._id
                       ? "text-white"
@@ -441,43 +438,96 @@ export default function EventSessions() {
       {openSection && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm"
-          onClick={() => setOpenSection(null)} // tap outside to close
+          onClick={() => setOpenSection(null)}
         >
           <div
-            className="bg-white rounded-2xl w-11/12 md:w-2/3 max-h-[80vh] overflow-hidden shadow-lg p-6"
-            onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
+            className="
+        relative
+        bg-white rounded-2xl 
+        w-11/12 md:w-2/3 
+        max-h-[80vh] overflow-hidden shadow-lg 
+        p-4 sm:p-5 md:p-6
+      "
+            onClick={(e) => e.stopPropagation()}
           >
-            {/* Header + Labels */}
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl font-bold">
-                {session?.tickets.filter((t) => t.type === openSection.section)
-                  .length > 0 ? (
-                  <h2 className="text-xl font-bold">
-                    {openSection.section} - ₹
-                    {
-                      session?.tickets.find(
-                        (t) => t.type === openSection.section
-                      ).price
-                    }
-                  </h2>
-                ) : (
-                  <h2 className="text-xl font-bold">
-                    {openSection.section} - ₹12.00
-                  </h2>
-                )}
-              </h2>
-              <div className="flex gap-3 text-sm">
+            <div
+              className="
+    mb-6
+    flex flex-wrap items-center justify-between 
+    gap-3
+  "
+            >
+              <div
+                className="
+      w-full sm:w-auto
+      flex items-center justify-between
+    "
+              >
+                {/* Title */}
+                <h2 className="text-xl font-bold">
+                  {session?.tickets.filter(
+                    (t) => t.type === openSection.section
+                  ).length > 0
+                    ? `${openSection.section} - ₹${
+                        session?.tickets.find(
+                          (t) => t.type === openSection.section
+                        ).price
+                      }`
+                    : `${openSection.section} - ₹12.00`}
+                </h2>
+
+                {/* Close Button (Right side) */}
+                <button
+                  onClick={() => setOpenSection(null)}
+                  className="
+        w-8 h-8 ml-3
+        flex items-center justify-center
+        rounded-full 
+        bg-gray-200 hover:bg-gray-300 
+        text-gray-700 
+        transition cursor-pointer
+        sm:hidden
+      "
+                >
+                  ✕
+                </button>
+              </div>
+
+              {/* ----------- LEGEND (Row 2 on small screens) ----------- */}
+              <div
+                className="
+      flex gap-3 text-sm flex-wrap
+      max-sm:text-xs max-sm:gap-2
+    "
+              >
                 <Legend color="bg-gray-200" label="Available" />
                 <Legend color="bg-indigo-600" label="Selected" />
                 <Legend color="bg-gray-400" label="Booked" />
                 <Legend color="bg-red-500" label="Blocked" />
               </div>
+              <button
+                onClick={() => setOpenSection(null)}
+                className="
+      hidden sm:flex
+      w-8 h-8
+      items-center justify-center
+      rounded-full 
+      bg-gray-200 hover:bg-gray-300 
+      text-gray-700 transition cursor-pointer
+    "
+              >
+                ✕
+              </button>
             </div>
 
             {/* Screen */}
-            <div className="relative flex justify-center mb-12 w-full">
+            <div className="relative flex justify-center mb-12 w-full max-sm:mb-8">
               <div
-                className="w-full md:w-2/3 h-6 bg-gray-800 rounded-b-full shadow-inner"
+                className="
+            w-full md:w-2/3 
+            h-6 max-sm:h-4 
+            bg-gray-800 rounded-b-full shadow-inner
+          "
                 style={{ backgroundColor: "#0c172f" }}
               />
               <span className="absolute -bottom-6 text-sm text-gray-600">
@@ -488,18 +538,24 @@ export default function EventSessions() {
             {/* Seats Grid */}
             <div className="max-h-[50vh] overflow-y-auto flex flex-col items-center gap-3 pb-1">
               {openSection.rows.map((row, rIdx) => (
-                <div key={rIdx} className="flex items-center gap-2">
-                  <span className="w-6 text-center font-medium text-sm">
+                <div
+                  key={rIdx}
+                  className="flex items-center gap-2 max-sm:gap-1"
+                >
+                  <span className="w-6 max-sm:w-5 text-center font-medium text-sm max-sm:text-xs">
                     {row.label}
                   </span>
-                  <div className="flex gap-2">
+
+                  <div className="flex gap-2 max-sm:gap-1">
                     {row.seats.map((seatId) => {
                       const seatInfo = session?.seats.find(
                         (s) =>
                           s.seatId === seatId &&
                           s.section === openSection.section
                       );
+
                       const status = seatInfo?.status || "available";
+
                       const isSelected = selectedSeats?.some(
                         (s) =>
                           s.seatId === seatId &&
@@ -507,16 +563,19 @@ export default function EventSessions() {
                       );
 
                       let classes =
-                        "w-6 h-6 flex items-center justify-center rounded-md text-xs font-medium transition";
+                        "flex items-center justify-center rounded-md font-medium transition " +
+                        "w-6 h-6 text-xs " +
+                        "max-sm:w-5 max-sm:h-5 max-sm:text-[10px] ";
+
                       if (status === "booked") {
-                        classes += " bg-gray-400 cursor-not-allowed text-white";
+                        classes += "bg-gray-400 cursor-not-allowed text-white";
                       } else if (status === "blocked") {
-                        classes += " bg-red-500 cursor-not-allowed text-white";
+                        classes += "bg-red-500 cursor-not-allowed text-white";
                       } else if (isSelected) {
-                        classes += " bg-indigo-600 text-white cursor-pointer";
+                        classes += "bg-indigo-600 text-white cursor-pointer";
                       } else {
                         classes +=
-                          " bg-gray-100 hover:bg-gray-200 text-gray-700 cursor-pointer";
+                          "bg-gray-100 hover:bg-gray-200 text-gray-700 cursor-pointer";
                       }
 
                       return (

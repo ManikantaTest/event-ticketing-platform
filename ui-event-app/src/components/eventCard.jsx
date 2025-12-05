@@ -56,7 +56,8 @@ const EventCard = ({ item }) => {
       className={`
     group rounded-2xl bg-white overflow-hidden shadow-sm 
     hover:shadow-xl hover:-translate-y-2 transition-all duration-300
-    w-full max-w-[290px] flex flex-col cursor-pointer
+    w-full max-w-[330px] sm:max-w-[300px] lg:max-w-[290px]
+ flex flex-col cursor-pointer
     ${isPast ? "opacity-75" : ""}
   `}
     >
