@@ -189,13 +189,6 @@ function OrganizerProfile() {
               Social Media
             </h3>
             <div className="flex space-x-2">
-              {/* {[Facebook, Instagram, Linkedin, Twitter].map((Icon, index) => (
-                <button
-                  key={index}
-                  className="p-1.5 sm:p-2 bg-gray-100 rounded-full hover:bg-gray-200"
-                >
-                  <Icon className="w-4 h-4 text-gray-600" />
-                </button> */}
               <button className="p-1.5 sm:p-2 bg-gray-100 rounded-full hover:bg-gray-200">
                 <Facebook className="w-4 h-4 text-blue-600" />
               </button>

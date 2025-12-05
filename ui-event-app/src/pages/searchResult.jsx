@@ -159,7 +159,7 @@ const SearchPage = ({ defaultCategory }) => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.5 }}
-            className="max-w-[1440px] mx-auto px-6 md:px-12 py-10"
+            className="max-w-[1440px] mx-auto px-1 sm:px-2 md:px-12 py-10"
           >
             {/* TOP SECTION */}
             <div className="flex flex-col gap-8">
@@ -206,7 +206,7 @@ const SearchPage = ({ defaultCategory }) => {
               </div>
 
               {/* ⭐ Events Header + Filters */}
-              <div className="flex flex-col md:flex-row justify-between items-start md:items-center px-10 gap-4">
+              <div className="flex flex-col md:flex-row justify-between items-start md:items-center px-2 md:px-10 gap-4">
                 {/* Result Count */}
                 <h2 className="text-xl md:text-2xl font-bold text-gray-900 flex items-center gap-2">
                   <h2 className="text-xl md:text-2xl font-bold text-gray-900 flex items-center gap-2">
@@ -320,7 +320,7 @@ const SearchPage = ({ defaultCategory }) => {
               </div>
             </div>
 
-            <div className="mt-10 mx-8">
+            <div className="mt-10 mx-2 md:mx-8">
               {filteredLoading["searchEvents"] && (
                 <div className="flex justify-center py-6">
                   <div className="animate-spin rounded-full h-8 w-8 border-4 border-gray-300 border-t-pink-500"></div>

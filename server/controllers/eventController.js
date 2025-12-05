@@ -872,15 +872,16 @@ const getEventsByUserInterests = async (req, res) => {
 
 const getSessionsByEventId = async (req, res) => {
   const { id } = req.params;
-  const today = new Date(); // current date-time
-  const startOfDay = new Date(today.setHours(0, 0, 0, 0));
-  const endOfDay = new Date(today.setHours(23, 59, 59, 999));
+  const now = new Date();
+
+  const startOfDay = new Date();
+  startOfDay.setHours(0, 0, 0, 0);
 
   try {
     const sessions = await Session.find({
       event: id,
-      releaseDate: { $lte: today }, // only sessions that are released
-      date: { $gte: startOfDay }, // only sessions that haven't passed
+      releaseDate: { $lte: now },
+      date: { $gte: startOfDay },
     })
       .select("date startTime endTime occupancy")
       .sort({ date: 1, startTime: 1 })
@@ -893,10 +894,42 @@ const getSessionsByEventId = async (req, res) => {
       });
     }
 
+    // Convert current time → minutes
+    const nowMinutes = now.getHours() * 60 + now.getMinutes();
+
+    const filteredSessions = sessions.filter((session) => {
+      const sessionDate = new Date(session.date);
+
+      // Check if the session is today
+      const isToday =
+        sessionDate.getFullYear() === now.getFullYear() &&
+        sessionDate.getMonth() === now.getMonth() &&
+        sessionDate.getDate() === now.getDate();
+
+      if (!isToday) {
+        // Future dates are valid
+        return true;
+      }
+
+      // Convert "HH:MM" startTime → minutes
+      const [h, m] = session.startTime.split(":").map(Number);
+      const sessionStartMinutes = h * 60 + m;
+
+      // keep only sessions that have not started yet
+      return sessionStartMinutes >= nowMinutes;
+    });
+
+    if (filteredSessions.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "no upcoming sessions for today",
+      });
+    }
+
     res.status(200).json({
       success: true,
       message: "sessions fetched successfully",
-      data: sessions,
+      data: filteredSessions,
     });
   } catch (err) {
     console.error(err);

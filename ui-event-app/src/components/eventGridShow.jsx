@@ -21,7 +21,7 @@ const EventGridShow = ({ title, events }) => {
       if (window.innerWidth >= 1536) setItemsPerPage(4); // 2xl
       else if (window.innerWidth >= 1280) setItemsPerPage(4); // xl
       else if (window.innerWidth >= 800) setItemsPerPage(3); // lg
-      else if (window.innerWidth >= 480) setItemsPerPage(2); // md
+      else if (window.innerWidth >= 400) setItemsPerPage(2); // md
       else setItemsPerPage(1); // sm
     };
 
