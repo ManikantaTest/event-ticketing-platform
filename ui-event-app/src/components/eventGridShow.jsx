@@ -62,7 +62,7 @@ const EventGridShow = ({ title, events }) => {
         {/* Grid */}
         <div
           className="grid  justify-items-center  gap-6 px-6
-          grid-cols-1 min-[480px]:grid-cols-2
+          grid-cols-1 min-[400px]:grid-cols-2
  min-[800px]:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4"
         >
           {currentItems.map((item, idx) => (
